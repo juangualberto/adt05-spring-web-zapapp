@@ -99,6 +99,7 @@ Rol "1" -- "1..*" RolUsuario: Tiene
 
 Pedido "1" -- "0..*" LineaPedido : Contiene
 Pedido "0..*" -- "1" Usuario : Asignado_operario
+Dirección "1" -- "1..*" Pedido: Enviado_a
 
 Producto "0..*" -- "0..*" LineaPedido : Forma_parte_de
 Categoría "1" -- "0..*" Producto : Pertenece_a

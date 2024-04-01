@@ -15,6 +15,7 @@ toc: false
 
 \pagebreak
 
+> Estos apuntes se han realizado para los alumnos de 2º de Ciclo Superior de Desarrollo de Aplicaciones Multiplataforma.
 
 ---
 
@@ -35,6 +36,10 @@ Bajo las siguientes condiciones:
 Para más detalles, consulta la [licencia completa](https://creativecommons.org/licenses/by-sa/4.0/legalcode.es).
 
 ---
+
+> Para una versión actualizada de este libro visita esta Web: <https://gitlab.iesvirgendelcarmen.com/juangu/tema05-spring-web-zapapp>.
+
+
 
 
 \pagebreak

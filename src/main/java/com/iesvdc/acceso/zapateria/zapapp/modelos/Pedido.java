@@ -30,4 +30,6 @@ public class Pedido {
     private List<LineaPedido> lineaPedidos;
     @ManyToOne
     private Usuario asignadoOperario;
+    @ManyToOne
+    private Direccion direccion;
 }
