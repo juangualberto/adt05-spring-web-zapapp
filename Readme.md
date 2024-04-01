@@ -14,3 +14,8 @@ Zapatería online con spring web.
 Creamos el proyecto con CTRL+SHIFT+P y buscamos Spring Initilizr:
 
 ![alt](docs/Captura%20de%20pantalla%20de%202024-03-19%2010-37-18.png)
+
+
+## Diagrama de casos de uso
+
+![Caso de uso](out/docs/diagrama-caso-uso/Diagrama%20de%20casos%20de%20uso.png)

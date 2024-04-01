@@ -1,0 +1,27 @@
+@startuml Diagrama de casos de uso
+
+usecase (gestión precios\n y productos) as Proc01
+actor :gestor: as Gestor
+Gestor --> Proc01
+
+usecase (envío de pedidos) as Proc02
+actor : operario \n pedidos : as Operario
+Operario --> Proc02
+
+usecase ( registrarse \n gestionar su \n información) as Proc03
+usecase (gestionar\n pedidos ) as Proc04
+usecase (carrito compra) as Proc05
+actor : cliente \n   web : as Cliente
+Cliente --> Proc03
+Cliente --> Proc04
+Cliente --> Proc05
+
+usecase ( login ) as Proc06
+
+Proc01 .. Proc06
+Proc02 .. Proc06
+Proc03 .. Proc06
+Proc04 .. Proc06
+Proc05 .. Proc06
+
+@enduml
