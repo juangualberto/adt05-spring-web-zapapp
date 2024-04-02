@@ -12,6 +12,45 @@ Funcionalidades clave de los controladores en Spring:
 4. **Generación de peticiones**: Los controladores devuelven objetos que representan la respuesta a enviar al cliente. Estos objetos pueden ser cadenas de texto, objetos **JSON**, **vistas** (templates) a renderizar, archivos, redirecciones, entre otros. La selección del tipo de respuesta se basa en la anotación del método del controlador y la configuración de Spring.
 5. **Manejo de excepciones**: Los controladores también pueden manejar excepciones que se produzcan durante el procesamiento de la solicitud. Esto permite capturar errores, realizar acciones específicas (como devolver un código de estado HTTP adecuado o mostrar una página de error personalizada) y mantener un flujo controlado de la aplicación.
 
+## Listado de rutas de nuestra aplicación
+
+
+Para completar la aplicación, se definen una serie de end-points que serán completados en sucesivos sprints (un sprint en la metodología SCRUM de trabajo es una tarea que al completarla obtenemos un subproducto funcional).
+
+### Servicio usuario
+
+RUTA | VERBO | DATOS | COMENTARIOS
+-----|-------|-------|------------
+/usuario/telefonos | GET | Parámetro 1: ID de usuario | Muestra los tel. del usuario que ha hecho login
+/usuario/telefonos/add | GET | Parámetro 1: ID de usuario | Muestra formulario para añadir tel. al usuario que ha hecho login
+/usuario/telefonos/add | POST | Parámetro 1: ID de usuario / body (tel) | Añade tel. al usuario que ha hecho login
+/usuario/telefonos/delete/{tel_id} | GET | Parámetro 1: ID de usuario | Muestra formulario para borrar tel. al usuario que ha hecho login
+/usuario/telefonos/delete/{tel_id}  | POST | Parámetro 1: ID de usuario / body (tel) | Borra tel. al usuario que ha hecho login
+/usuario/telefonos/update/{tel_id} | GET | Parámetro 1: ID de usuario | Muestra formulario para editar el tel. del usuario que ha hecho login
+/usuario/telefonos/update/{tel_id}  | POST | Parámetro 1: ID de usuario / body (tel) | Edita tel. del usuario que ha hecho login
+
+### Servicio producto
+
+Rutas del servicio para el rol GESTOR:
+
+RUTA | METODO | ROL | Observaciones
+-----|--------|---------|--------------
+/admin/producto | GET | gestor | Mostrar listado productos
+/admin/producto/create | GET | gestor | Mostrar formulario alta productos
+/admin/producto/create | POST | gestor | Crear en la BBDD el producto
+/admin/producto/update | GET | gestor | Mostrar formulario modificación productos
+/admin/producto/update | POST | gestor | Modificar en la BBDD el producto
+/admin/producto/delete | GET | gestor | Mostrar formulario borrar productos
+/admin/producto/delete | POST | gestor | Borrar en la BBDD el producto
+/admin/categoria | GET | gestor | Mostrar listado de categorías
+/admin/categoria/create | GET | gestor | Mostrar formulario alta categoria
+/admin/categoria/create | POST | gestor | Crear reserva en la BBDD
+/admin/categoria/:id/producto | GET | gestor | Mostrar los productos de una categoría
+/admin/categoria/producto | POST | gestor | Mostrar maestro-detalle de categoria para un usuario
+/admin/categoria/producto/:id | GET | gestor | Mostrar categoria para ese producto
+/admin/categoria/producto | POST | gestor | Mostrar maestro-detalle de categoria para una categoría
+
+
 ## Ejemplo de controlador sencillo
 
 \pagebreak

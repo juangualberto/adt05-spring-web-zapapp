@@ -77,7 +77,7 @@ class Producto {
     - nombre: String
     - descripción: String
     - talla: String
-    - precio: String
+    - precio: Float
 }
 
 
@@ -102,14 +102,14 @@ class LineaPedido {
     - id: Long
     - precio: Float
     - cantidad: Integer
-    ' - producto: Producto
+    ' - producto: Producto '
 }
 
 class Categoría {
     - id: Long
     - nombre: String
     - descripcion: String
-    ' - padre: Categoría
+    ' - padre: Categoría ' 
 }
 
 class Dirección {
@@ -121,8 +121,8 @@ class Dirección {
     - puerta: String
     - portal: String
     - nombre: String
-    ' - codpos: CodigoPostal
-    ' - usuario: Usuario
+    ' - codpos: CodigoPostal '
+    ' - usuario: Usuario '
 }
 
 class Telefono {
@@ -130,7 +130,7 @@ class Telefono {
     - codigoPais: Long
     - numero: Long
     - nombre: String
-    ' - usuario: Usuario
+    ' - usuario: Usuario '
 }
 
 enum Rol {

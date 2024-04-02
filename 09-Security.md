@@ -10,6 +10,15 @@ Así aparece el password:
 
 ![Password Spring Boot](docs/password.png)
 
+### Spring Security
+
+Las contraseñas deberán estar cifradas con BCRYPT, puedes usar este ejemplo para hacer pruebas:
+
+Plaint text password | Hashed Password
+---------------------|----------------
+Secreto_123 | $2a$10$PMDCjYqXJxGsVlnve1t9Jug2DkDDckvUDl8.vF4Dc6yg0FMjovsXO
+
+
 Para dar seguridad a la aplicación podemos crear una clase de configuración donde inyectamos los *beans* encargados de la seguridad. Además sería recomendable crear nuestros formularios de login y actualización de nuestros datos.
 
 Ejemplo de Bean de configuración (puede ser código o un archivo XML):

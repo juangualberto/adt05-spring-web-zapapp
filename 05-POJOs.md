@@ -2,6 +2,26 @@
 
 En Spring Java llamamos **POJO** o Plain Old Java Objects a aquellas clases Java sencillas que no necesitan heredar o implementar interfaces del framework Spring. En este caso también lo haremos para denominar a las clases entidad de nuestra aplicación.
 
+Para facilitar el trabajo usaremos anotaciones de Lombok y JPA.
+
+**Anotaciones Lombok**:
+
+* `@Data`: Genera todos los getters y setters, toString, hashCode y compare. Genera el constructor con todos los atributos.
+* `@NoArgsConstructor`: Genera el constructor vacío que hace falta para JAXB, por ejemplo.
+
+
+**Anotaciones jakarta.persistence** (antiguamente javax.persistence):
+
+* `@Entity`: El objeto (clase) marcado con esta anotación será una tabla en la base de datos.
+* `@Id`: El atributo marcado con esta anotación será la clave primaria de la tabla correspondiente al objeto o clase.
+* `@ManytoOne`: Marcamos así atributos que son a su vez entidades (clases modelo) con los que tenemos una relación de muchos a uno. Lo ponemos en atributos que son a su vez clases entidad que yo he definido (para indicar clave foránea)
+* `@ManyToAny`: Igual que anterior pero cuando puede ser NULL la clave foránea referenciada
+* `@ManyToMany`: Muchos a muchos, se creará una entidad intermedia como cuando en un modelo entidad-relación tenemos una relación de muchos a muchos.
+* `@OnetoMany`: Marcamos así atributos que son a su vez entidades (clases modelo) con los que tenemos una relación de uno a muchos (será una lista o similar este atributo).
+* `@OneToOne`: Relación de uno-a-uno.
+* `@GeneratedValue(strategy = GenerationType.IDENTITY)`: Unido a `@Id`, será el *AUTO_INCREMENT* de MySQL (en la tabla asiciada a ese objeto).
+* `@Column(length = 25)`: En un atributo de una clase entidad fija la longitud del VARCHAR, por ejemplo.
+
 Veamos la siguiente clase usuario:
 
 ```java
@@ -165,7 +185,7 @@ public class Producto {
     private String nombre;
     private String descripción;
     private String talla;
-    private String precio;
+    private Float precio;
     @ManyToOne
     private Categoria categoria;
 }
@@ -203,23 +223,15 @@ public class RolUsuario {
 @Entity
 @Data
 @NoArgsConstructor
-public class Usuario {
+public class Telefono {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long codigoPais;
+    private Long numero;
     private String nombre;
-    private String apellido;
-    private String email;
-    private String username;
-    private String password;
-    
-    @OneToMany(mappedBy = "usuario")
-    private List<Direccion> direcciones;
-    @OneToMany(mappedBy = "usuario")
-    private List<Telefono> telefonos;
-    @OneToMany(mappedBy = "usuario")
-    private List<RolUsuario> roles;
-
+    @ManyToOne
+    private Usuario usuario;
 }
 
 ```
