@@ -37,7 +37,98 @@ En este archivo estamos indicando:
 
 - `spring.session.store-type`: Especifica el tipo de almacenamiento de sesiones que se utilizará en la aplicación. En este caso, se configura en "jdbc" para almacenar las sesiones en la base de datos a través de JDBC.
 
-En resumen, este archivo de configuración se utiliza para especificar la configuración de la base de datos, la configuración de Hibernate y otras configuraciones relacionadas con el proyecto de Spring. Estas propiedades se cargan automáticamente durante la ejecución del proyecto y se utilizan para establecer la conexión con la base de datos, configurar Hibernate y otros componentes del proyecto.
+Este archivo de configuración se utiliza fundamentalmente para indicar la configuración de la base de datos, la configuración de Hibernate y otras configuraciones relacionadas con el proyecto de Spring. Estas propiedades se cargan automáticamente durante la ejecución del proyecto y se utilizan para establecer la conexión con la base de datos, configurar Hibernate y otros componentes del proyecto.
+
+## RepoCategoria
+
+```java
+package com.iesvdc.acceso.zapateria.zapapp.repositorios;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.iesvdc.acceso.zapateria.zapapp.modelos.Categoria;
+
+@Repository
+public interface RepoCategoria extends JpaRepository<Categoria, Long> {
+
+}
+
+```
+
+## RepoCodigoPostal
+
+```java
+@Repository
+public interface RepoCodigoPostal extends JpaRepository <CodigoPostal, Long> {
+    
+}
+```
+
+## RepoDireccion
+
+```java
+@Repository
+public interface RepoDireccion extends JpaRepository<Direccion, Long> {
+
+}
+```
+
+## RepoLineaPedido
+
+```java
+@Repository
+public interface RepoLineaPedido extends JpaRepository<LineaPedido, Long> {
+
+}
+```
+
+## RepoPedido
+
+```java
+@Repository
+public interface RepoProducto extends JpaRepository<Producto, Long> {
+
+}
+```
+
+## RepoProducto
+
+```java
+@Repository
+public interface RepoProducto extends JpaRepository<Producto, Long> {
+
+}
+
+```
+
+## RepoRolUsuario
+
+```java
+@Repository
+public interface RepoRolUsuario extends JpaRepository<RolUsuario, Long> {
+
+}
+```
+
+## RepoTelefono
+
+```java
+@Repository
+public interface RepoTelefono extends JpaRepository<Telefono, Long> {
+
+}
+```
+
+## RepoUsuario
+
+```java
+@Repository
+public interface RepoUsuario extends JpaRepository<Usuario, Long> {
+
+}
+
+```
 
 
 \pagebreak

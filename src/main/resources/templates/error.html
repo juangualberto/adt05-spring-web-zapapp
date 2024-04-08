@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+
+        <div class="container">
+            <h5>Lo sentimos</h5>
+            <p>Ha ocurrido un error.</p>
+            <p th:text="${mensaje}?${mensaje}:'No ha sido posible realizar su petición'"></p>
+        </div>
+        
+        <div th:replace="~{fragmentos/general.html :: footer}"></div>
+    </div>
+</body>
+
+</html>

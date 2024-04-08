@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión usuarios</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container m-3">
+        <form class="row"
+            th:action="@{/categorias/delete/}+${categoria.id}"
+            th:object="${categoria}"
+            method="post">
+
+            <div class="mb-3">
+                <label class="form-label" for="nombre">Nombre de la categoria:</label>
+                <input class="form-control" name="nombre" placeholder="Escriba aquí el nombre" th:value="${categoria.nombre}" disabled/>
+            </div>
+            <div>
+                <label class="form-label" for="padre">Categoría padre:</label>
+                <input class="form-control" th:value="${categoria.padre} ? ${categoria.padre.nombre} : 'Sin padre'" disabled>
+            </div>
+            <div>
+                <button class="btn btn-danger mt-3" type="submit">Borrar</button>
+                <a href="/categorias" class="btn btn-success mt-3">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

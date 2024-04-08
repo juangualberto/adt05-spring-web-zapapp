@@ -86,7 +86,7 @@ RUTA            | METODO | Datos | Observaciones
 /carro | GET | Nada | Ver la cesta de la compra
 /carro/add | POST | ID de producto y cantidad | Añade productos al carro
 /productos | GET | nada | Listado de productos
-/productos/{id} | GET | El ID del producto | Formulario para añadir ese poducto a la cesta (post a /carro/add)
+/productos/{id} | GET | El ID del producto | Formulario para añadir el producto con ese ID a la cesta (post a /carro/add)
 /carro/delete | GET | Nada | Formulario vaciar cesta de la compra (¿segurio?)
 /carro/delete | POST | Nada | Vacía la cesta de la compra
 /carro/delete/{id} | GET | ID de linea producto | Formulario eliminar de la cesta de la compra un producto (¿seguro?)

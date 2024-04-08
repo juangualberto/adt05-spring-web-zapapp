@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión usuarios</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container m-3">
+        <form class="row"
+            th:action="@{/localidades/add}"
+            th:object="${localidad}"
+            method="post">
+
+            <div class="mb-3">
+                <label class="form-label" for="nombre">Nombre de la localidad:</label>
+                <input class="form-control" name="nombre" placeholder="Escriba aquí el nombre"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="cp">Código Postal de la localidad:</label>
+                <input class="form-control" name="cp" placeholder="Escriba aquí el CP"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="provincia">Provincia de:</label>
+                <input class="form-control" name="provincia" placeholder="Escriba aquí la provincia"/>
+            </div>
+            
+            <div>
+                <button class="btn btn-success mt-3" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>
