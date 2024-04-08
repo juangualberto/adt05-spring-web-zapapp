@@ -1,0 +1,9 @@
+@startuml
+
+(*) -up-> "Selecciona un pedido\n REALIZADOS"
+-right-> "Marca el pedido\n PREPARANDO"
+--> "Marca el pedido\n ENVIADO"
+-left-> (*)
+
+@enduml
+

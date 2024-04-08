@@ -1,0 +1,8 @@
+@startuml
+
+(*) -up-> "Selecciona un pedido\n de todos"
+-right-> "Marca el pedido\npara ver detalle"
+-->  (*)
+
+@enduml
+

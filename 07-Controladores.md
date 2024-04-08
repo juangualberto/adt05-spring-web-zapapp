@@ -52,6 +52,47 @@ RUTA            | METODO | ROL | Observaciones
 /admin/categoria/producto/:id | GET | gestor | Mostrar categoria para ese producto
 /admin/categoria/producto | POST | gestor | Mostrar maestro-detalle de categoria para una categoría
 
+### Servicio gestionar "mis pedidos"
+
+Un cliente puede gestionar (ver) el listado de pedidos así como el detalle de los mismos. Deberemos implementar un listado y un maestro-detalle de pedidos.
+
+RUTA            | METODO | ROL | Observaciones
+----------------|--------|---------|--------------
+/mis-pedidos | GET | cliente | Mostrar listado pedidos
+/mis-pedidos/detalle/{id} | GET | cliente | Mostrar detalle del pedido con ese ID
+/mis-pedidos/detalle | POST | cliente | Mostrar detalle del pedido con el ID que se pasa como parámetro
+
+### Servicio envío (estados) pedidos
+
+El operario gestiona los pedidos. Ve el listado de pedidos sin procesar y en el momento que cambia un pedido a "en proceso" se le asigna y será el encargado de enviarlo. Igualmente también debe tener un listado de pedidos "en preparación", "enviados" y "completados". Tendremos un maestro-detalle en función del estado y del operario. 
+
+RUTA            | METODO | Datos    | Observaciones
+----------------|--------|----------|--------------
+/pedidos        | GET    | nada     | Listado de pedidos en estado 
+"REALIZADO"
+/pedidos/{id}        | GET    | ID del pedido     | Formulario ¿desea servir este pedido?
+/pedidos/{id}        | POST    | ID del pedido     | Se le asigna al operario que hizo login ese pedido
+/pedidos/estado/{estado}   | GET    | estado     | Listado de pedidos en ese estado para el operario que ha hecho LOGIN
+/pedidos/operario/{idOpe}   | GET    | ID operario y estado     | Listado de pedidos en ese estado para ese operario
+/pedidos/operario/{idOpe}/estado/{estado}   | GET    | ID operario y estado     | Listado de pedidos en ese estado para ese operario
+
+
+### Servicio carro de la compra
+
+Un usuario con perfil cliente gestiona su carro de la compra:
+
+RUTA            | METODO | Datos | Observaciones
+----------------|--------|---------|--------------
+/carro | GET | Nada | Ver la cesta de la compra
+/carro/add | POST | ID de producto y cantidad | Añade productos al carro
+/productos | GET | nada | Listado de productos
+/productos/{id} | GET | El ID del producto | Formulario para añadir ese poducto a la cesta (post a /carro/add)
+/carro/delete | GET | Nada | Formulario vaciar cesta de la compra (¿segurio?)
+/carro/delete | POST | Nada | Vacía la cesta de la compra
+/carro/delete/{id} | GET | ID de linea producto | Formulario eliminar de la cesta de la compra un producto (¿seguro?)
+/carro/delete/{id} | POST | ID de linea producto | Eliminar de la cesta de la compra un producto
+/carro/confirm | GET | nada | Formulario confirmar compra
+/carro/confirm | POST | nada | Confirma compra
 
 ## Ejemplo de controlador sencillo
 
