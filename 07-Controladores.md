@@ -19,8 +19,8 @@ Para completar la aplicación, se definen una serie de end-points que serán com
 
 ### Servicio usuario
 
-RUTA | VERBO | DATOS | COMENTARIOS
------|-------|-------|------------
+  RUTA          |VERBO| DATOS | COMENTARIOS
+----------------|-----|-------|------------
 /usuario/telefonos | GET | Parámetro 1: ID de usuario | Muestra los tel. del usuario que ha hecho login
 /usuario/telefonos/add | GET | Parámetro 1: ID de usuario | Muestra formulario para añadir tel. al usuario que ha hecho login
 /usuario/telefonos/add | POST | Parámetro 1: ID de usuario / body (tel) | Añade tel. al usuario que ha hecho login
@@ -33,8 +33,8 @@ RUTA | VERBO | DATOS | COMENTARIOS
 
 Rutas del servicio para el rol GESTOR:
 
-RUTA | METODO | ROL | Observaciones
------|--------|---------|--------------
+RUTA            | METODO | ROL | Observaciones
+----------------|--------|---------|--------------
 /admin/producto | GET | gestor | Mostrar listado productos
 /admin/producto/create | GET | gestor | Mostrar formulario alta productos
 /admin/producto/create | POST | gestor | Crear en la BBDD el producto
@@ -45,6 +45,8 @@ RUTA | METODO | ROL | Observaciones
 /admin/categoria | GET | gestor | Mostrar listado de categorías
 /admin/categoria/create | GET | gestor | Mostrar formulario alta categoria
 /admin/categoria/create | POST | gestor | Crear reserva en la BBDD
+/admin/categoria/delete | GET | gestor | Mostrar formulario borrar categoria
+/admin/categoria/delete | POST | gestor | Borra categoría de la BBDD
 /admin/categoria/:id/producto | GET | gestor | Mostrar los productos de una categoría
 /admin/categoria/producto | POST | gestor | Mostrar maestro-detalle de categoria para un usuario
 /admin/categoria/producto/:id | GET | gestor | Mostrar categoria para ese producto

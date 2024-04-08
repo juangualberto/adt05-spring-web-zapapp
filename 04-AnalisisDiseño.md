@@ -34,7 +34,7 @@ usecase (envío de pedidos) as Proc02
 actor : operario \n pedidos : as Operario
 Operario --> Proc02
 
-usecase ( registrarse \n gestionar su \n información) as Proc03
+usecase ( gestionar mi \n información) as Proc03
 usecase (gestionar\n pedidos ) as Proc04
 usecase (carrito compra) as Proc05
 actor : cliente \n   web : as Cliente
@@ -42,7 +42,7 @@ Cliente --> Proc03
 Cliente --> Proc04
 Cliente --> Proc05
 
-usecase ( login ) as Proc06
+usecase ( registro / login ) as Proc06
 
 Proc01 .. Proc06
 Proc02 .. Proc06
@@ -205,6 +205,7 @@ Este diagrama describe la estructura del sistema de gestión de pedidos y produc
 
 ![Diagrama de clases](./out/docs/diagrama-clases/diagrama-clases.png)
 
+> Ahora que hemos terminado de modelar nuestro proceso de negocio en los casos de uso y conocemos las entidades gracias al modelado de clases, pasamos a la siguiente fase: creación de los POJOs (a partir de del diagrama de clases) e identificación de los servicios y end-points de la aplicación Web.
 
 \pagebreak
 
