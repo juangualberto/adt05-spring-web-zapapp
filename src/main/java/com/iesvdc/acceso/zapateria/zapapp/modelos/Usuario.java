@@ -22,7 +22,7 @@ public class Usuario {
     private String email;
     private String username;
     private String password;
-    private String enabled;
+    private boolean enabled;
     
     @OneToMany(mappedBy = "usuario")
     private List<Direccion> direcciones;
