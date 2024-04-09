@@ -36,10 +36,10 @@ public class SecurityConfiguration {
         amb.jdbcAuthentication()
             .dataSource(dataSource)
             .usersByUsernameQuery("select username, password, enabled "+
-                "from usuario")
+                "from usuario where username = ?")
             .authoritiesByUsernameQuery("select u.username, r.rol as 'authority' "+
                 "from usuario u, rol_usuario r " +
-                "where u.id=r.usuario_id");
+                "where u.id=r.usuario_id and username = ?");
       }
 
       @Bean
