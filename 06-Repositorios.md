@@ -41,20 +41,34 @@ Este archivo de configuración se utiliza fundamentalmente para indicar la confi
 
 ## RepoCategoria
 
+Cada categoría viene identificada por un código numérico único, un nombre y una descripción. Además cada categoría tiene una (y sólo una) categoría padre. Para preguntar a una categoría por sus hijos usaremos su repositorio.
+
 ```java
 package com.iesvdc.acceso.zapateria.zapapp.repositorios;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.iesvdc.acceso.zapateria.zapapp.modelos.Categoria;
 
 @Repository
 public interface RepoCategoria extends JpaRepository<Categoria, Long> {
-
+    @Query("SELECT c FROM Categoria c WHERE c.padre = :padre")
+    List<Categoria> findByPadre(Categoria padre);
 }
 
 ```
+
+Observa la consulta `@Query("SELECT c FROM Categoria c WHERE c.padre = :padre")`, en esta consulta JPQL:
+
+- `SELECT c`: Indica que queremos seleccionar entidades `Categoria`.
+- `FROM Categoria c`: Especifica la entidad de la que queremos seleccionar, que es `Categoria` y la abreviamos como `c`.
+- `WHERE c.padre = :padre`: Filtra las categorías basadas en su atributo `padre`, que debe ser igual al objeto `Categoria` proporcionado como parámetro `padre`.
+
+Con esta consulta JPQL personalizada, obtenemos todas las categorías que tienen el mismo padre que el objeto `Categoria` proporcionado.
 
 ## RepoCodigoPostal
 
