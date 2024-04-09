@@ -27,3 +27,13 @@ INSERT INTO producto (nombre, descripcion, precio, talla, categoria_id) VALUES('
 INSERT INTO producto (nombre, descripcion, precio, talla, categoria_id) VALUES('Zapatillas Running Brooks Adrenaline GTS', 'Zapatillas de running con soporte', 149.99, '41', 5);
 INSERT INTO producto (nombre, descripcion, precio, talla, categoria_id) VALUES('Sandalias Mujer Birkenstock Arizona', 'Sandalias de cuero para mujer', 99.99, '38', 4);
 INSERT INTO producto (nombre, descripcion, precio, talla, categoria_id) VALUES('Botas Fútbol Adidas Predator Freak', 'Botas de fútbol para un control preciso', 169.99, '44', 1);
+
+
+INSERT INTO `usuario` (`apellido`, `email`, `enabled`, `nombre`, `password`, `username`) VALUES ('Administrador', 'pepe@sincorreo.com', '1', 'Pepe', '$2a$10$JdTDI22BygL/kxl4jR4zGeeLAhU2xafTlZrtfWki/4xm5TXg5qc.q', 'admin');
+INSERT INTO `rol_usuario` (`usuario_id`, `rol`) VALUES (1, 'GESTOR');
+
+INSERT INTO `usuario` (`apellido`, `email`, `enabled`, `nombre`, `password`, `username`) VALUES ('Cliente', 'pepe@sincorreo.com', '1', 'Pepe', '$2a$10$JdTDI22BygL/kxl4jR4zGeeLAhU2xafTlZrtfWki/4xm5TXg5qc.q', 'cliente');
+INSERT INTO `rol_usuario` (`usuario_id`, `rol`) VALUES (2, 'CLIENTE');
+
+INSERT INTO `usuario` (`apellido`, `email`, `enabled`, `nombre`, `password`, `username`) VALUES ('Operador', 'pepe@sincorreo.com', '1', 'Pepe', '$2a$10$JdTDI22BygL/kxl4jR4zGeeLAhU2xafTlZrtfWki/4xm5TXg5qc.q', 'operario');
+INSERT INTO `rol_usuario` (`usuario_id`, `rol`) VALUES (3, 'OPERARIO');

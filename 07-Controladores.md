@@ -21,13 +21,13 @@ Para completar la aplicación, se definen una serie de end-points que serán com
 
   RUTA          |VERBO| DATOS | COMENTARIOS
 ----------------|-----|-------|------------
-/usuario/telefonos | GET | Parámetro 1: ID de usuario | Muestra los tel. del usuario que ha hecho login
-/usuario/telefonos/add | GET | Parámetro 1: ID de usuario | Muestra formulario para añadir tel. al usuario que ha hecho login
-/usuario/telefonos/add | POST | Parámetro 1: ID de usuario / body (tel) | Añade tel. al usuario que ha hecho login
-/usuario/telefonos/delete/{tel_id} | GET | Parámetro 1: ID de usuario | Muestra formulario para borrar tel. al usuario que ha hecho login
-/usuario/telefonos/delete/{tel_id}  | POST | Parámetro 1: ID de usuario / body (tel) | Borra tel. al usuario que ha hecho login
-/usuario/telefonos/update/{tel_id} | GET | Parámetro 1: ID de usuario | Muestra formulario para editar el tel. del usuario que ha hecho login
-/usuario/telefonos/update/{tel_id}  | POST | Parámetro 1: ID de usuario / body (tel) | Edita tel. del usuario que ha hecho login
+/usuario/telefonos | GET | nada | Muestra los tel. del usuario que ha hecho login
+/usuario/telefonos/add | GET | nada | Muestra formulario para añadir tel. al usuario que ha hecho login
+/usuario/telefonos/add | POST | body (tel) | Añade tel. al usuario que ha hecho login
+/usuario/telefonos/delete/{tel_id} | GET | nada | Muestra formulario para borrar tel. al usuario que ha hecho login
+/usuario/telefonos/delete/{tel_id}  | POST | body (tel) | Borra tel. al usuario que ha hecho login
+/usuario/telefonos/update/{tel_id} | GET | nada | Muestra formulario para editar el tel. del usuario que ha hecho login
+/usuario/telefonos/update/{tel_id}  | POST | body (tel) | Edita tel. del usuario que ha hecho login
 
 ### Servicio producto
 
