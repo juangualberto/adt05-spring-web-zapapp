@@ -1,1 +1,44 @@
-hola mundo
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: INCIO</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>  
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+
+    <div sec:authorize="hasAuthority('ROLE_ANONYMOUS')" class="container">
+      <div class="card" style="width: 18rem;">
+        <img src="./img/img.jpeg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Bienvenido a Zapato Veloz</h5>
+          <p class="card-text">Su tienda de zapatos de confianza.</p>
+          <a href="/login" class="btn btn-primary">Login</a>
+          <a href="/register" class="btn btn-primary">Registrarse</a>
+        </div>
+      </div>
+    </div>
+
+    <div sec:authorize="hasAuthority('CLIENTE')" class="container">
+      <h3>Bienvenido <span th:text="${#authentication.name}"></span> a Zapato Veloz </h3>
+      <p> Pulse para comenzar a 
+      <a href="/productos" class="btn btn-info">¡COMPRAR!</a>
+      </p>
+    </div>
+
+    <div sec:authorize="hasAuthority('OPERARIO')" class="container">
+      <h3>Bienvenido <span th:text="${#authentication.name}"></span> a Zapato Veloz </h3>
+      <p> Pulse para comenzar a 
+      <a href="/pedidos" class="btn btn-info"> 
+        <i class="fa-solid fa-bag-shopping"></i> Atender pedidos
+      </a>
+      </p>
+    </div>
+
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

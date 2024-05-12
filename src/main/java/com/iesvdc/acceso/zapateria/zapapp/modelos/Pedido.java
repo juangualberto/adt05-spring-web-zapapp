@@ -24,12 +24,17 @@ public class Pedido {
     private LocalDate fecha;
     private String observaciones;
     private Float descuento;
+    private Float total;
+    @ManyToOne
+    private Usuario cliente;
     @Enumerated(EnumType.STRING)
     private Estado estado;
     @OneToMany(mappedBy = "pedido")
     private List<LineaPedido> lineaPedidos;
     @ManyToOne
-    private Usuario asignadoOperario;
+    private Usuario operario;
     @ManyToOne
     private Direccion direccion;
+    @ManyToOne
+    private Telefono telefono;
 }

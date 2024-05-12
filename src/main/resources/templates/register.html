@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Nuevo Usuario</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+
+  <div class="container">
+    <form action="/register" method="POST">
+      <div class="row">
+        <div class="col-6">
+          <label for="username" class="form-label"> Username: </label>
+          <input name="username" id="username" type="text" class="form-control" />
+        </div>
+        <div class="col-6">
+          <label for="password" class="form-label">Password:</label>
+          <input name="password" id="password" type="password" class="form-control" />
+        </div>
+        <div class="col-6">
+          <label class="form-label"> Nombre: </label>
+          <input name="nombre" type="text" class="form-control" />
+        </div>
+        <div class="col-6">
+          <label class="form-label"> Apellidos: </label>
+          <input name="apellidos" type="text" class="form-control" />
+        </div>
+        
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label"> Código de país: </label>
+            <input name="pais" type="number" class="form-control" value="34" />
+            <div class="form-text">Código del país sin el símbolo "+"</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"> Teléfono: </label>
+            <input name="telefono" type="tel" class="form-control" />
+          </div>
+        </div>   
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label"> Email: </label>
+            <input name="email" type="email" class="form-control" />
+          </div>
+          <div class="mb-3">
+            Acepta las condiciones:
+            <input type="checkbox" class="form-check-input" />            
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Enviar</button>
+          </div>
+        </div>     
+      </div>
+    </form>
+  </div>
+
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+  </div>
+</body>
+
+</html>

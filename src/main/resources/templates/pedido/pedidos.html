@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online: Añada productos a su carro de la compra</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+        <h3>Listado de pedidos realizados en esta Web</h3>
+       
+        <div th:if="${pedidos != null}">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>                        
+                        <th>Estado</th>
+                        <th>Dirección envío</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr th:each="pedido : ${pedidos}">
+                        <td th:text="${pedido.id} ? ${pedido.id} : ''"> </td>
+                        <td th:text="${pedido.fecha} ? ${pedido.fecha} : ''"> </td>
+                        <td th:text="${pedido.estado} ? ${pedido.estado} : ''"> </td>
+                        <td th:text="${pedido.direccion} ? ${pedido.direccion.nombre} : 'Sin dirección' "> </td>
+                        <td th:text="${pedido.total} ? ${pedido.total} : ''"> </td>                        
+                        <td>                        
+                            <a class="btn btn-light" th:href="|/mis-pedidos/${pedido.id}|"> <i class="fa-solid fa-info"></i> | Detalle </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${pedidos == null}">
+            <h4>Aún no se ha realizado ningún pedido.</h4>
+        </div>
+
+
+
+        <div th:replace="~{fragmentos/general.html :: footer}"></div>
+    </div>
+</body>
+
+</html>

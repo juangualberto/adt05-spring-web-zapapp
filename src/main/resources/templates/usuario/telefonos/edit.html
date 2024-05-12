@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión teléfonos</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <p>
+        Editando el teléfono para el usuario 
+        <span th:text="${usuario.username}"></span>:
+    </p>
+    <div class="container m-3">
+        <form class="row"
+            th:object="${telefono}"
+            th:action="@{|/mis-datos/telefonos/add|}"
+            method="post">
+            <input hidden th:field="*{id}"/> 
+            <div class="mb-3">
+                <label class="form-label" for="codigoPais">Código de país (sin el símbolo +):</label>
+                <input type="number" class="form-control" 
+                    name="codigoPais" placeholder="Código del País, ej: 34"
+                    th:field="*{codigoPais}"/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="numero">Número de telefono (sin espacios):</label>
+                <input type="number" class="form-control" 
+                    name="numero" placeholder="Escriba aquí el teléfono"
+                    th:field="*{numero}"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="nombre">Descripción:</label>
+                <input th:field="*{nombre}" type="text" class="form-control" name="numero" placeholder="p. ej. 'casa'"/>
+            </div>     
+            <div>
+                <button class="btn btn-success mt-3" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

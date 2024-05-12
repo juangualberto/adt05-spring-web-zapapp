@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/font-awesome/6.5.2/css/all.min.css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div th:fragment="navigation">
+            <nav sec:authorize="hasAuthority('GESTOR')" class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Zapato veloz</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Inicio </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Usuarios
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a id="menu_modulo" class="dropdown-item" href="/admin/usuarios">Listado</a></li>
+                                    <li><a id="menu_enseñanza" class="dropdown-item" href="/admin/usuarios/add">Alta</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Categorías
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a id="menu_modulo" class="dropdown-item" href="/admin/categoria">Listado</a></li>
+                                    <li><a id="menu_enseñanza" class="dropdown-item" href="/admin/categoria/add">Alta</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Productos y precios
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a id="menu_modulo" class="dropdown-item" href="/admin/producto">Listado</a></li>
+                                    <li><a id="menu_modulo" class="dropdown-item" href="/admin/producto/categoria">Por categorías</a></li>
+                                    <li><a id="menu_enseñanza" class="dropdown-item" href="/admin/producto/add">Alta</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ayuda">Ayuda </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/acerca">Sobre esta Web </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Desconexión </a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </nav>
+            <nav sec:authorize="hasAuthority('CLIENTE')" class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Zapato veloz</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-regular fa-user"></i> | Mis datos
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a id="menu_modulo" class="dropdown-item" href="/mis-datos"> <i class="fa-solid fa-user"></i> Personal </a></li>
+                                    <li><a id="menu_enseñanza" class="dropdown-item" href="/mis-datos/telefonos"> <i class="fa-solid fa-phone"></i> Teléfonos </a></li>
+                                    <li><a id="menu_enseñanza" class="dropdown-item" href="/mis-datos/direcciones"> <i class="fa-solid fa-address-book"></i> Direcciones </a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/productos"> <i class="fa-solid fa-cart-plus"></i> | Comprar </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/carro"> <i class="fa-solid fa-cart-shopping"></i> | Carrito </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/mis-pedidos"> <i class="fa-solid fa-list"></i> | Mis pedidos </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ayuda"><i class="fa-solid fa-question"></i> | Ayuda </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/acerca"><i class="fa-solid fa-circle-info"></i> | Sobre esta Web </a>
+                            </li>
+
+                           
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> | Desconexión </a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </nav>
+            <nav sec:authorize="hasAuthority('OPERARIO')" class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Zapato veloz</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Inicio </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/pedidos"> Listar pedidos </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ayuda">Ayuda </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/acerca">Sobre esta Web </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Desconexión </a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </nav>
+            <nav sec:authorize="hasAuthority('ROLE_ANONYMOUS')" class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Zapato veloz</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Inicio </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ayuda">Ayuda </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/acerca">Sobre esta Web </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Entrar en el sistema </a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div th:fragment="header">
+            <h2 class="text-center">Departamento de Informática </h2>
+
+            <div class="d-flex justify-content-center">
+                <div class="card bg-light text-center" style="width: 18rem;">
+                    <img class="card-img-top" src="/img/ESCUDO_CHICO.png" alt="Escudo Informática">
+                    <div class="card-body">
+                        <h5 class="card-title">Zapatería Online</h5>
+                        <p class="card-text"> Gestión integral de zapatería On-Line. </p>
+                        <a href="#" id="menu_informe" class="btn btn-primary">Generar informe</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        
+
+        <div th:fragment="footer">
+            <footer>
+                <div class="text-center">                    
+                    <hr/>
+                    
+                    <p>Entró en el sistema como: 
+                        <span th:text="${#authentication.name}"></span>
+                        (<span th:text="${#authentication.authorities[0]}"></span>)
+                        <p sec:authorize="hasAuthority('GESTOR')">
+                            <b>Entró en el sistema como admin</b>
+                        </p>
+                    </p>
+                    <p>
+                        <span class="text-center">Ⓒ 2024. IES Virgen del Carmen. CFGS Desarrollo Multiplataforma.</span>
+                    </p>
+                    <hr/>
+                </div>
+                <script src="/webjars/jquery/jquery.min.js"></script>
+                <script src="/webjars/popper.js/umd/popper.min.js"></script>
+                <script src="/webjars/bootstrap/js/bootstrap.js"></script>
+                <script src="/js/aux.js"></script>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

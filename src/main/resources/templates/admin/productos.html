@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online: Gestión productos</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+        <h3>Listado de productos</h3>
+        <div class="form">
+            <label class="form-label" for="filtro">Filtrar por texto:</label>
+            <input class="form-control" id="filtro" type="text" placeholder="Introduzca las letras a buscar" />
+        </div>
+        <table id="listado" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>nombre</th>
+                    <th>descripcion</th>
+                    <th>categorias</th>
+                    <th>talla</th>
+                    <th>precio</th>
+                    <th>stock</th>
+                    <th>acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.id}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>                    
+                    <td th:text="${producto.categoria} != null ? ${producto.categoria.nombre} : 'Sin categoria'"></td>
+                    <td th:text="${producto.talla}"></td>
+                    <td th:text="|${producto.precio} €|"></td>
+                    <td th:text="${producto.stock}"></td>
+                    <td>                        
+                        <a class="btn btn-success" th:href="|/admin/producto/edit/${producto.id}|"> <i class="fa-solid fa-pen-to-square"></i> </a>
+                        <a class="btn btn-danger" th:href="|/admin/producto/delete/${producto.id}|"> <i class="fa-solid fa-trash"></i> </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            <a class="btn btn-primary" href="/admin/producto/add"> nuevo producto </a>
+            <a class="btn btn-success" href="/admin/producto/categoria"> productos por categorías </a>
+        </p>
+    </div>
+
+
+
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+
+    <script>
+        <!-- Cargamos jQuery en el footer, CUIDADO porque esto que usa jQuery debe ir después o no funciona -->
+
+        $(document).ready(function () {
+            $("#filtro").on("keyup", function () {
+                var value = $(this).val().toLowerCase();                
+                $("#listado tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+
+    </script>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online: Añada productos a su carro de la compra</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+        
+        <h3>Productos en su carro de la compra</h3>
+        <div th:if="${lineapedidos != null}" >
+            <table id="listado" class="table table-striped">
+                <thead>
+                    <tr>                    
+                        <th>Producto</th>
+                        <!-- <th>descripcion</th> -->
+                        <th>categoría</th>
+                        <th>Talla</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="lineapedido : ${lineapedidos}">
+                        <td th:text="${lineapedido.producto.nombre}"></td>
+                        <!-- <td th:text="${lineapedido.producto.descripcion}"></td> -->
+                        <td th:text="${lineapedido.producto.categoria} != null ? ${lineapedido.producto.categoria.nombre} : 'Sin categoria'"></td>
+                        <td th:text="${lineapedido.producto.talla}"></td>
+                        <td th:text="|${lineapedido.producto.precio} €|"></td>
+                        <td th:text="${lineapedido.cantidad}"></td>
+                        <td>                        
+                            <a class="btn btn-primary m-1" th:href="|/carro/edit/${lineapedido.id}|"> <i class="fa-regular fa-pen-to-square"></i> </a>
+                            <a class="btn btn-danger m-1" th:href="|/carro/del/${lineapedido.id}|"> <i class="fa-regular fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="5">TOTAL</th>
+                        <td th:text="|${total} €|"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>            
+                <a class="btn btn-primary m-1" href="/productos"> <i class="fa-solid fa-store"></i> Seguir comprando </a>
+                <a class="btn btn-primary m-1" href="/carro/confirmar"> <i class="fa-regular fa-credit-card"></i> Terminar y pagar </a>
+            </div>
+        </div>
+        <div class="container" th:if="${lineapedidos == null}" >
+            <h3>La cesta está vacía.</h3>
+            <p>Añada productos.</p>
+            <a href="/productos" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i></a>
+        </div>
+
+        
+    </div>
+
+
+
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+
+
+    </div>
+</body>
+
+</html>

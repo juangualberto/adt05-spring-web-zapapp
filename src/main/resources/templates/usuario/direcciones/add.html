@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión Teléfonos</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+
+    <div class="container m-3">
+        <p>Añadiendo una dirección al usuario: 
+            <span th:text="${usuario.nombre}"></span> 
+            <span th:text="${usuario.apellido}"></span> 
+            (<span th:text="${usuario.username}"></span>) 
+        </p>
+        <form th:action="@{/mis-datos/direcciones/add}"
+                class="row" th:object="${direccion}" method="post">
+            <input th:field="*{id}" type="hidden" />
+            <input th:field="*{usuario.id}" type="hidden"/> 
+            <div class="mb-3">
+                <label class="form-label" for="cp">Código Postal:</label>
+                <input id="cp" name="cp" type="text" 
+                    class="form-control" placeholder="23001" oninput="completeCP('#cp', '#codigoPostal', '#cp-text')"/>
+                <div id="cp-text" class="form-text">Introduzca un código postal válido</div>
+                <input th:field="*{codigoPostal}" id="codigoPostal" hidden />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="tipoVia">Tipo de Vía:</label>
+                <input th:field="*{tipoVia}" type="text" 
+                    class="form-control" name="tipoVia" placeholder="Calle, Plaza, Avenida..."/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="nombreVia">Nombre de Vía:</label>
+                <input th:field="*{nombreVia}" type="text" 
+                 class="form-control" name="nombreVia" placeholder="Nombre de la calle, avenida, plaza..."/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="numero">Número:</label>
+                <input th:field="*{numero}" type="text" 
+                class="form-control" name="numero" placeholder="Escriba aquí el teléfono"/>
+            </div>           
+            <div class="mb-3">
+                <label class="form-label" for="planta">Planta:</label>
+                <input th:field="*{planta}" type="text" class="form-control" name="planta" placeholder="Escriba aquí el teléfono"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="portal">Portal:</label>
+                <input th:field="*{portal}" type="text" class="form-control" name="portal" placeholder="Escriba aquí el teléfono"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="puerta">Puerta:</label>
+                <input th:field="*{puerta}" type="text" class="form-control" name="puerta" placeholder="Escriba aquí el teléfono"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="nombre">Descripción:</label>
+                <input th:field="*{nombre}" type="text" class="form-control" name="nombre" placeholder="p. ej. 'casa'"/>
+            </div>   
+            <div>
+                <button class="btn btn-success mt-3" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>    
+</div>
+</body>
+
+</html>

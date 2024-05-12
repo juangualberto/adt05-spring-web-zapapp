@@ -205,7 +205,9 @@ Este diagrama describe la estructura del sistema de gestión de pedidos y produc
 
 ![Diagrama de clases](./out/docs/diagrama-clases/diagrama-clases.png)
 
-> Ahora que hemos terminado de modelar nuestro proceso de negocio en los casos de uso y conocemos las entidades gracias al modelado de clases, pasamos a la siguiente fase: creación de los POJOs (a partir de del diagrama de clases) e identificación de los servicios y end-points de la aplicación Web.
+> Fíjate cómo almacenamos el precio de los productos en la entidad lineaPedido por si varía con el tiempo. Podríamos haber usado una entidad `precioProducto` que, según las fechas del pedido, nos de el precio del producto, una posibilidad muy usada también y con menos redundancia de datos. No obstante, esta opción debemos usarla sólo con un disparador que impida modificar precios de un tiempo pasado, pues podría dar lugar a incongruencias en los pedidos pasados o aún en proceso. Hoy día el almacenamiento es muy económico pero sin embargo, el tiempo de CPU y/o consultas de disco están sujetos a costes adicionales en servidores en la nube (AWS, Azure, etc.).
+
+Ahora que hemos terminado de modelar nuestro proceso de negocio en los casos de uso y conocemos las entidades gracias al modelado de clases, pasamos a la siguiente fase: creación de los POJOs (a partir de del diagrama de clases) e identificación de los servicios y end-points de la aplicación Web.
 
 \pagebreak
 

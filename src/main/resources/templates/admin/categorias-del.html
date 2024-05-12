@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión Categorías</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>  
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+
+    <h3>Eliminar una categoría:</h3>
+    
+    <div class="container m-3">
+      <form class="row" th:action="@{/admin/categoria/delete/}+${categoria.id}" th:object="${categoria}" method="post">
+          <input type="number" name="id" hidden th:value="${categoria.id}" />
+          <div class="mb-3">
+              <label class="form-label" for="nombre">Nombre de la categoria:</label>
+              <input class="form-control" name="nombre" th:value="${categoria.nombre}" readonly/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="descripcion">Descripción de la categoria:</label>
+            <input class="form-control" name="descripcion" th:value="${categoria.descripcion}" readonly/>
+          </div>
+          <div>
+              <label class="form-label" for="padre" readonly>Seleccione la categoría padre:</label>
+              <select name="padre" class="form-select" readonly>
+                  <option value="">Sin padre</option>
+                  <option th:selected="
+                        ${categoria.padre} ? 
+                        (${categoria.padre.id}==${categoriaPadre.id}?'selected':'false') : 'false'"
+                      th:each="categoriaPadre: ${categorias}" th:value="${categoriaPadre.id}"
+                      th:text="${categoriaPadre.nombre}">
+                  </option>
+              </select>
+          </div>
+          <div>
+              <button class="btn btn-success mt-3" type="submit">Eliminar</button>
+              <button onclick="history.back ()" class="btn btn-danger mt-3" type="submit">Cancelar</button>
+          </div>
+      </form>
+  </div>
+
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

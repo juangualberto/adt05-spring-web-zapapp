@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión Categorías</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+  <div class="container">
+    <h3>Listado de categorías</h3>
+    <p>Pulse en las acciones:</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>nombre</th>
+          <th>descripcion</th>
+          <th>padre</th>
+          <th>acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="categoria : ${categorias}">
+          <td th:text="${categoria.id}"></td>
+          <td th:text="${categoria.nombre}"></td>
+          <td th:text="${categoria.descripcion}"></td>
+          <td th:text="${categoria.padre} != null ? ${categoria.padre.nombre} : 'Sin padre'"></td>
+          <td>
+            <a class="btn btn-warning" th:href="|/admin/categoria/hijos/${categoria.id}|"> filtrar </a>
+            <a class="btn btn-success" th:href="|/admin/categoria/edit/${categoria.id}|"> editar </a>
+            <a class="btn btn-danger" th:href="|/admin/categoria/delete/${categoria.id}|"> borrar </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <a class="btn btn-primary" href="/admin/categoria/add"> nueva categoría </a>
+    </p>
+  </div>
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+  </div>
+</body>
+
+</html>

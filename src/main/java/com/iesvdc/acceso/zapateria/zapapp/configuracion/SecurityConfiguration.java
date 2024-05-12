@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -43,16 +42,19 @@ public class SecurityConfiguration {
 
                 return http
                         .authorizeHttpRequests((requests) -> requests
-                                .requestMatchers("/webjars/**", "/img/**", "/js/**", "/register/**", "/ayuda/**", "/login", "/denegado")
+                                .requestMatchers("/webjars/**", "/img/**", "/js/**", 
+                                        "/register/**", "/ayuda/**", "/login", "/codpos/**", 
+                                        "/denegado", "/error", "/acerca")
                                 .permitAll() 
-                                .requestMatchers("/admin/**", "/admin/*/**" , "/admin/*/*/**")
+                                .requestMatchers("/admin/**", "/admin/*/**" , "/admin/*/*/**", "/admin/*/*/*/*/*/**")
                                 //.authenticated()
                                 .hasAuthority("GESTOR")
                                 .requestMatchers("/pedidos/**", "/pedidos/*/**", "/pedidos/*/*/**", "/pedidos/*/*/*/**", "/pedidos/*/*/*/*/**")
                                 //.authenticated()
                                 .hasAuthority("OPERARIO")
                                 .requestMatchers("/mis-pedidos/**", "/mis-pedidos/*/**", 
-                                    "/productos/**", "/productos/*/**", 
+                                    "/productos/**", "/productos/*/**",
+                                    "/mis-datos/**", "/mis-datos/*/**","/mis-datos/*/*/**","/mis-datos/*/*/*/**",
                                     "/carro/**", "/carro/*/**")
                                 //.authenticated()
                                 .hasAuthority("CLIENTE")
@@ -65,7 +67,7 @@ public class SecurityConfiguration {
                         ).exceptionHandling((exception)-> exception.
                                 accessDeniedPage("/denegado") )
                         .formLogin((formLogin) -> formLogin
-                                //.loginPage("/login")
+                                .loginPage("/login")
                                 .permitAll()
                         ).rememberMe(
                                 Customizer.withDefaults()

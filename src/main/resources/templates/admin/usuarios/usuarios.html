@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión usuarios</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+  
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+    <h3>Lista de usuarios</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Nombre</td>
+          <td>Apellido</td>
+          <td>Teléfono</td>
+          <td>Username</td>
+          <td>Direcciones</td>
+          <td>Acciones</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="usuario: ${usuarios}">
+          <td th:text="${usuario.nombre}"></td>
+          <td th:text="${usuario.apellido}"></td>
+
+          
+          <td th:if="${#lists.size(usuario.telefonos) == 0}">
+            <a class="btn btn-primary" th:href="|/admin/usuarios/${usuario.id}/telefonos/add|">Añadir Teléfono</a>
+          </td>
+          <td th:unless="${#lists.size(usuario.telefonos) == 0}">
+            <div th:each="telefono : ${usuario.telefonos}">
+              (+<span th:text="${telefono.codigoPais}"></span>)
+              <span th:text="${telefono.numero}"></span>
+            </div>
+          </td>
+          
+          <td th:text="${usuario.username}"></td>
+          
+          <td th:if="${#lists.size(usuario.direcciones) == 0}">
+            <a class="btn btn-primary" th:href="|/admin/usuarios/${usuario.id}/direcciones/add|">Añadir dirección</a>
+          </td>
+          <td th:unless="${#lists.size(usuario.direcciones) == 0}">
+            <div th:each="direccion : ${usuario.direcciones}">
+              <span th:text="${direccion.tipoVia}"></span>
+              <span th:text="${direccion.nombreVia}"></span>,
+              número: <span th:text="${direccion.numero}"></span>
+              planta: <span th:text="${direccion.planta}"></span>
+            </div>
+          </td>
+          <td>
+              <a class="btn btn-success" th:href="|/admin/usuarios/edit/${usuario.id}|">Editar</a>
+              <a class="btn btn-danger" th:href="|/admin/usuarios/delete/${usuario.id}|">Borrar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+  </div>
+</body>
+
+</html>

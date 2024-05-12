@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Teléfonos de usuarios</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>  
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+  <div class="container">
+    
+    <h4>
+        Listando teléfonos del usario: 
+        <span th:text="${usuarioActual.username}"></span>
+    </h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código del país</th> 
+                <th>Número de teléfono</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="telefono: ${telefonos}">
+                <td th:text="${telefono.codigoPais}"></td>
+                <td th:text="${telefono.numero}"></td>
+                <td th:text="${telefono.nombre}"></td>
+                <td>
+                    <a class="btn btn-success" 
+                        th:href="|telefonos/edit/${telefono.id}|">
+                        <i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                    <a class="btn btn-danger"  
+                        th:href="|telefonos/delete/${telefono.id}|"> 
+                        <i class="fa-solid fa-trash-can"></i> Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="telefonos/add"><i class="fa-regular fa-square-plus"></i> Añadir un teléfono </a>
+
+    
+    </div>
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

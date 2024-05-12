@@ -17,13 +17,13 @@ public class Direccion {
     private Long id;
     private String tipoVia;
     private String nombreVia;
-    private String número;
+    private String numero;
     private String planta;
     private String puerta;
     private String portal;
     private String nombre;
     @ManyToOne    
-    private CodigoPostal codpos;
+    private CodigoPostal codigoPostal;
     @ManyToOne
     private Usuario usuario;
 }

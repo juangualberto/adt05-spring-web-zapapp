@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión Productos</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>  
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+
+
+  <h3>Editar un producto</h3>
+
+  <div class="container m-3">
+      <form class="row" th:action="@{/admin/producto/add}" th:object="${producto}" method="post">
+          <input type="number" name="id" hidden th:value="${producto.id}" />
+          <div class="mb-3">
+              <label class="form-label" for="nombre">Nombre del producto:</label>
+              <input class="form-control" name="nombre" th:value="${producto.nombre}" />
+          </div>
+          <div class="mb-3">
+              <label class="form-label" for="descripcion">Descripción del producto:</label>
+              <input class="form-control" name="descripcion" th:value="${producto.descripcion}" />
+          </div>
+          <div class="mb-3">
+              <label class="form-label" for="talla">Talla del producto:</label>
+              <input class="form-control" name="talla" th:value="${producto.talla}" />
+          </div>
+          <div class="mb-3">
+              <label class="form-label" for="precio">Precio del producto (en euros "€"):</label>
+              <input class="form-control" name="precio" th:value="${producto.precio}" type="number" min="1" max="500" step="0.01"/> 
+          </div>
+          <div class="mb-3">
+              <label class="form-label" for="stock">Stock (unidades):</label>
+              <input class="form-control" name="stock" th:value="${producto.stock}" type="number" min="1" max="500"/> 
+          </div>
+          <div>
+              <label class="form-label" for="padre">Seleccione la categoria:</label>
+              <select name="categoria" class="form-select">
+                  <option value="">Sin categoría</option>
+                  <option 
+                      th:each="categoriaPadre: ${categorias}" th:value="${categoriaPadre.id}"
+                      th:text="${categoriaPadre.nombre}"
+                      th:selected="
+                        ${producto.categoria} ? 
+                        (${producto.categoria.id}==${categoriaPadre.id}?'selected':'false') : 'false'">
+                  </option>
+              </select>
+          </div>
+          <div>
+              <button class="btn btn-success mt-3" type="submit">Enviar</button>
+              <a href="/admin/producto" class="btn btn-danger mt-3" type="submit">Cancelar</a>
+          </div>
+      </form>
+  </div>
+    
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

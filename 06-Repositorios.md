@@ -39,6 +39,8 @@ En este archivo estamos indicando:
 
 Este archivo de configuración se utiliza fundamentalmente para indicar la configuración de la base de datos, la configuración de Hibernate y otras configuraciones relacionadas con el proyecto de Spring. Estas propiedades se cargan automáticamente durante la ejecución del proyecto y se utilizan para establecer la conexión con la base de datos, configurar Hibernate y otros componentes del proyecto.
 
+A continuación vamos a ver cómo definir los repositorios. Esto es sólo la definición, para ver cómo usarlos puedes echar un ojo al siguiente apartado: **Controladores**.
+
 ## RepoCategoria
 
 Cada categoría viene identificada por un código numérico único, un nombre y una descripción. Además cada categoría tiene una (y sólo una) categoría padre. Para preguntar a una categoría por sus hijos usaremos su repositorio.
@@ -70,7 +72,28 @@ Observa la consulta `@Query("SELECT c FROM Categoria c WHERE c.padre = :padre")`
 
 Con esta consulta JPQL personalizada, obtenemos todas las categorías que tienen el mismo padre que el objeto `Categoria` proporcionado.
 
+No obstante este código es redundante pues Spring tiene la capacidad de generar por nosotros cualquier **"findBy\*"**, en verdad basta con hacer: 
+
+```java
+package com.iesvdc.acceso.zapateria.zapapp.repositorios;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.iesvdc.acceso.zapateria.zapapp.modelos.Categoria;
+
+@Repository
+public interface RepoCategoria extends JpaRepository<Categoria, Long> {
+    List<Categoria> findByPadre(Categoria padre);
+}
+
+```
+
 ## RepoCodigoPostal
+
+Los códigos postales que tenemos en la base de datos son accesibles mediante este repositorio:
 
 ```java
 @Repository
@@ -111,7 +134,7 @@ public interface RepoProducto extends JpaRepository<Producto, Long> {
 ```java
 @Repository
 public interface RepoProducto extends JpaRepository<Producto, Long> {
-
+    List<Producto> findByCategoria(Categoria padre);
 }
 
 ```

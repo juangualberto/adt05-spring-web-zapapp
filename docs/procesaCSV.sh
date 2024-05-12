@@ -1,0 +1,1 @@
+cat codigos_postales_municipios.csv| awk -F ";" '{print "INSERT INTO codigo_postal (codigo_postal,municipio, pais) VALUES (\""$1"\", \""$2"\", \""$3"\");"}' > import.csv.sql

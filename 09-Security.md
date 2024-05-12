@@ -1,4 +1,4 @@
-# Spring Security
+# Seguridad
 
 Por defecto Spring incorpora su propio sistema de login que está habilitado simplemente al añadir la dependencia en el pom.xml.
 
@@ -96,6 +96,9 @@ public class SecurityConfiguration {
 
 ```
 
+Aquí vemos cómo buscar en la base de datos el usuario, contraseña y rol. Fíjate como Spring nos obliga a tener un campo *enabled* para el usuario.
+
+Para cada autoridad decimos qué rutas son accesibles. Aunque no lo vemos, estamos creando un filtro para un servlet.
 
 \pagebreak
 

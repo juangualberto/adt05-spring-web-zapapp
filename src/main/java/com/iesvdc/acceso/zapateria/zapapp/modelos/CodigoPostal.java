@@ -14,9 +14,9 @@ public class CodigoPostal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer CP;
-    private String localidad;
+    private Integer codigoPostal;
+    // private String localidad;
     private String municipio;
-    private String comunidad;
-    private String pais;    
+    // private String comunidad;
+    private String pais;
 }

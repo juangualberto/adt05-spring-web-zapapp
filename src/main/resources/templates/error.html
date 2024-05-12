@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: ERROR</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>  
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+
+    <h3><span th:text="${titulo} != null ? ${titulo} : 'Error al procesar su petición' "></span></h3>
+
+    <p th:text="${mensaje} != null ? ${mensaje} : 'Ha ocurrido un error inesperado.
+      vuelva a intentarlo más tarde o contacte con el administrador.' "></p>
+
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

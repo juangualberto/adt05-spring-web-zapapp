@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online: Añada productos a su carro de la compra</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+        <h3>Añadir producto a su carro de la compra</h3>
+        <form method="POST" th:action="|/carro/add/${producto.id}|">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th><td th:text="${producto.id}"></td>                     
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>nombre</th><td th:text="${producto.nombre}"></td>
+                </tr>
+                <tr>
+                    <th>descripcion</th><td th:text="${producto.descripcion}"></td>
+                </tr>
+                <tr>
+                     <th>categorias</th><td th:text="${producto.categoria} != null ? ${producto.categoria.nombre} : 'Sin categoria'"></td>
+                </tr>
+                <tr>
+                    <th>talla</th><td th:text="${producto.talla}"></td>
+                </tr>
+                <tr>
+                    <th>precio</th><td th:text="${producto.precio}"></td>
+                </tr>
+                <tr>
+                    <th>Cantidad:</th><td> <input name="cantidad" type="number" class="form-control" value="1" min="1" th:max="${producto.stock}"></td>
+                </tr>
+                <tr>
+                    <th>acciones</th>
+                    <td>
+                        <button type="submit" class="btn btn-primary" th:href="|/carro/add/${producto.id}|"> <i class="fa-solid fa-cart-plus"></i> Añadir al carro </a>
+                    </td>                
+                </tr>
+            </tbody>
+        </table>
+        </form>        
+        <p>
+            <a class="btn btn-primary" href="/carro"> <i class="fa-solid fa-store"></i> </a>
+        </p>
+    </div>
+
+
+
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+
+    <script>
+        <!-- Cargamos jQuery en el footer, CUIDADO porque esto que usa jQuery debe ir después o no funciona -->
+
+        $(document).ready(function () {
+            $("#filtro").on("keyup", function () {
+                var value = $(this).val().toLowerCase();                
+                $("#listado tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+
+    </script>
+
+    </div>
+</body>
+
+</html>

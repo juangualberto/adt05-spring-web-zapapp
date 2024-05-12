@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online: Nuevo Usuario</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+
+    <div class="container">        
+        <form th:action="@{/mis-datos}" th:object="${usuario}" method="post">
+            <div class="row">
+                <input name="id" th:field="*{id}" hidden />
+                <div class="col-6">
+                    <label class="form-label" > Username: </label>
+                    <input th:field="*{username}" type="text" class="form-control" disabled />
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Password:</label>
+                    <input th:field="*{password}"type="password" class="form-control" />
+                </div>
+                <div class="col-6">
+                    <label class="form-label"> Nombre: </label>
+                    <input th:field="*{nombre}" type="text" class="form-control" />
+                </div>
+                <div class="col-6">
+                    <label class="form-label"> Apellidos: </label>
+                    <input th:field="*{apellido}" type="text" class="form-control" />
+                </div>
+
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label class="form-label"> Email: </label>
+                        <input th:field="*{email}" type="email" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <button class="btn btn-primary m-1" type="submit">Aceptar</button>
+                        <a href="/" class="btn btn-primary m-1" type="submit">Cancelar</a>
+                    </div>
+                </div>
+        </form>
+    </div>
+
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+    </div>
+</body>
+
+</html>

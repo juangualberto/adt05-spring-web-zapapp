@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online: Gestión productos</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+        <h3>Productos de la categoria "<span th:text="${categoria} != null ? ${categoria.nombre} : 'sin selección'" ></span>": </h3>
+        
+        <form method="get" id="formulario">
+        <div class="form-control">
+            <label for="usuario_actual">Productos por categoría:</label>
+            <select class="form-select" id="seleccion">
+                <option value="-1">Sin selección</option>
+                <option 
+                    th:each="cat : ${categorias}"
+                    th:value="${cat.id}"
+                    th:text="${cat.nombre}"
+                    th:selected="(${cat.id} == (${categoria} != null ? ${categoria.id} : '-1') )?'selected':'false'"
+                >
+                </option>
+            </select>
+        </div>
+        </form>
+        
+        <table id="listado" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categorías</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.id}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>
+                    <td th:text="${producto.categoria} != null ? ${producto.categoria.nombre} : 'Sin categoria'"></td>
+                    <td>
+                        <a class="btn btn-success" th:href="|/admin/producto/edit/${producto.id}|"> editar </a>
+                        <a class="btn btn-danger" th:href="|/admin/producto/delete/${producto.id}|"> borrar </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            <a class="btn btn-primary" href="/admin/producto/add"> nuevo producto </a>
+            <a class="btn btn-success" href="/admin/producto/categoria/1"> productos por categorías </a>
+        </p>
+    </div>
+
+
+
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+
+    <script>
+        <!-- Cargamos jQuery en el footer, CUIDADO porque esto que usa jQuery debe ir después o no funciona -->
+        
+        $("#formulario").on('change', function() {                
+                let seleccionado = $(this).find(":checked").val();
+                console.log("Ha sido seleccionado: "+ seleccionado);
+                if (seleccionado === "-1")
+                    formulario.action = '/admin/producto/categoria';
+                else
+                    formulario.action = '/admin/producto/categoria/'+seleccionado;
+                formulario.submit();
+        } );
+
+    </script>
+
+    </div>
+</body>
+
+</html>

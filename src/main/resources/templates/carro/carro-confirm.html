@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online: Añada productos a su carro de la compra</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+        <h3>Para terminar, indique su:</h3>
+        <form th:action="@{/carro/confirmar}" method="post" th:object="${pedido}">
+            <div class="mb-3">
+                <h4>Dirección de envío</h4>
+                <input th:field="*{id}" hidden />
+                <select class="form-select" th:field="*{direccion}">
+                    <option th:each="dir : ${direcciones}" th:value="${dir.id}"
+                        th:text="|${dir.nombre} - ${dir.codigoPostal.codigoPostal} - ${dir.nombreVia}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <h4>Teléfono de contacto</h4>
+                <select class="form-select" th:field="*{telefono}">
+                    <option th:each="tel : ${telefonos}" th:value="${tel.id}" 
+                        th:text="|${tel.nombre} - ${tel.numero}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-text">Observaciones</span>
+                <input type="text" th:field="*{observaciones}" class="form-control" aria-label="Observaciones"/>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio Unidad</th>
+                        <th>Unidades</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="lp : ${pedido.lineaPedidos}">
+                        <td th:text="${lp.producto.nombre}"></td>
+                        <td th:text="${lp.producto.precio}"></td>
+                        <td th:text="${lp.cantidad}"></td>
+                        <td th:text="|${#numbers.formatDecimal(lp.producto.precio * lp.cantidad, 2,2)} € |"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td th:text="|${total} €|"></td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div class="mb-3">
+                <a class="btn btn-primary m-1" href="/productos">
+                    <i class="fa-solid fa-store"></i> Seguir comprando </a>
+                <button type="submit" class="btn btn-primary m-1" href="/carro/confirmar">
+                    <i class="fa-regular fa-credit-card"></i> Terminar y pagar </button>
+            </div>
+        </form>
+
+
+
+    </div>
+
+
+
+
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+
+
+    </div>
+</body>
+
+</html>

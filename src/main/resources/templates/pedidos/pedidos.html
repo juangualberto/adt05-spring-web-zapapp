@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión usuarios</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>  
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Observaciones</th>
+                    <th>Total</th>
+                    <th>CP</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>                
+            <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                    <th th:text="${pedido.id}"></th>
+                    <td th:text="${pedido.estado}"></td>
+                    <td th:text="${pedido.fecha}"></td>
+                    <td th:text="${pedido.observaciones}"></td>
+                    <td th:text="${pedido.total}"></td>
+                    <td th:text="${pedido.direccion.codigoPostal.codigoPostal}"></td>
+                    <td th:text="${pedido.telefono.numero}"></td>
+                    <td>
+                        <a th:href="|${currentUrl}/${pedido.id}|" class="btn btn-info">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            Preparar
+                        </a>
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+
+    </div>
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

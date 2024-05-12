@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Su Zapatería Online: Añada productos a su carro de la compra</title>
+    <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+    <div class="container">
+        <h3>Detalle de pedidos realizados en esta Web</h3>
+        <div th:if="${pedido != null}" class="m-2 border rounded border-2">
+            <table id="listado" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <td th:text="${pedido.id}"> </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Fecha</th>
+                        <td th:text="${pedido.fecha}"> </td>
+                    </tr>
+                    <tr>
+                        <th>Estado</th>
+                        <td th:text="${pedido.estado}"> </td>
+                    </tr>
+                    <tr>
+                        <th>Dirección envío</th>
+                        <td
+                            th:text="${pedido.direccion} ? |${pedido.direccion.tipoVia} ${pedido.direccion.nombreVia},  ${pedido.direccion.numero} | : 'Sin dirección' ">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Teléfono</th>
+                        <td th:text="|+(${pedido.telefono.codigoPais}) ${pedido.telefono.numero}|"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${lineaPedidos != null}" class="m-2 border rounded border-2">
+            <table id="listado" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <!-- <th>descripcion</th> -->
+                        <th>categoría</th>
+                        <th>Talla</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="lineaPedido : ${pedido.lineaPedidos}">
+                        <td th:text="${lineaPedido.producto.nombre}"></td>
+                        <!-- <td th:text="${lineaPedido.producto.descripcion}"></td> -->
+                        <td
+                            th:text="${lineaPedido.producto.categoria} != null ? ${lineaPedido.producto.categoria.nombre} : 'Sin categoria'">
+                        </td>
+                        <td th:text="${lineaPedido.producto.talla}"></td>
+                        <td th:text="|${lineaPedido.precio} €|"></td>
+                        <td th:text="${lineaPedido.cantidad}"></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4">TOTAL</th>
+                        <td th:text="|${pedido.total} €|"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div th:replace="~{fragmentos/general.html :: footer}"></div>
+
+
+    </div>
+</body>
+
+</html>

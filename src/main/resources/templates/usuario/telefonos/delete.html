@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Gestión teléfonos</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>
+    <div th:replace="~{fragmentos/general.html :: navigation}"> </div>    
+    <div class="container m-3">
+        <h4>
+            Eliminando el teléfono para el usuario 
+            <span th:text="${usuario.username}"></span>:
+        </h4>
+        <form 
+            th:action="@{|/mis-datos/telefonos/delete/${telefono.id}|}" 
+            th:object="${telefono}"
+            class="row" 
+            method="post">
+            <!-- <input hidden th:field="*{usuario}"/> -->
+            <div class="mb-3">
+                <label class="form-label" for="codigoPais">Código de país (sin el símbolo +):</label>
+                <input type="number" class="form-control" 
+                    name="codigoPais" placeholder="Código del País, ej: 34"
+                    th:field="*{codigoPais}" disabled/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="numero">Número de telefono (sin espacios):</label>
+                <input type="number" class="form-control" 
+                    name="numero" placeholder="Escriba aquí el teléfono"
+                    th:field="*{numero}" disabled/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="nombre">Descripción:</label>
+                <input th:field="*{nombre}" type="text" 
+                    class="form-control" name="numero" placeholder="p. ej. 'casa'" disabled/>
+            </div>    
+            <div>
+                <button class="btn btn-danger mt-3" type="submit"><i class="fa-solid fa-trash"></i> Confirmar</button>
+                <a class="btn btn-success mt-3" th:href="|/mis-datos/telefonos|"><i class="fa-solid fa-backward-step"></i> Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

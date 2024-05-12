@@ -61,6 +61,8 @@ A continuación vamos a ver cómo hemos generado cada una de las clases modelo d
 
 ### Categoría
 
+Esta entidad nos servirá para gestionar las categorías de calzado:
+
 ```java
 @Entity
 @Data
@@ -77,6 +79,8 @@ public class Categoria {
 ```
 
 ### Código Postal
+
+Esta clase sirve para los códigos postales de las ciudades (para dirección). Puedes descargar un listado de todos los códigos postales en [este repositorio de Github](https://github.com/inigoflores/ds-codigos-postales-ine-es).
 
 ```java
 @Entity
@@ -95,6 +99,8 @@ public class CodigoPostal {
 ```
 
 ### Dirección
+
+Entidad para gestionar las direcciones de un usuario de la aplicación:
 
 ```java
 @Entity
@@ -120,6 +126,8 @@ public class Direccion {
 
 ### Estado
 
+Estados posibles por los que pasa un pedido:
+
 ```java
 public enum Estado {
     CARRITO, REALIZADO, PREPARANDO, ENVIADO, COMPLETADO, INCIDENCIA
@@ -128,6 +136,8 @@ public enum Estado {
 ```
 
 ### Línea Pedido
+
+En un pedido tenemos varios productos (con la cantidad de ese producto y su precio en el momento de la compra). A cada una de estas entidades las llamamos "línea pedido".
 
 ```java
 @Entity
@@ -150,8 +160,6 @@ public class LineaPedido {
 ### Pedido 
 
 Hay que destacar en los pedidos que un carro de la compra es un pedido con estado "CARRITO". La lógica de la aplicación sólo debe permitir un carro de la compra por usuario, es decir, un pedido en estado "CARRITO". Por seguridad esto se puede controlar también con un disparador, de manera que por cada usuario 
-
-
 
 ```java
 @Entity
@@ -177,6 +185,8 @@ public class Pedido {
 
 ### Producto
 
+La entidad producto nos ayuda a gestionar la información de los zapatos de la base de datos:
+
 ```java
 @Entity
 @Data
@@ -197,6 +207,8 @@ public class Producto {
 
 ### Rol
 
+Listado de roles posibles para los usuarios:
+
 ```java
 public enum Rol {
     OPERARIO, CLIENTE, GESTOR
@@ -204,6 +216,8 @@ public enum Rol {
 ```
 
 ### Rol Usuario
+
+Entidad para asignar roles a los usuarios:
 
 ```java
 @Entity
@@ -221,6 +235,8 @@ public class RolUsuario {
 ```
 
 ### Teléfono
+
+Entidad para los teléfonos de cada usuario:
 
 ```java
 @Entity
@@ -240,6 +256,8 @@ public class Telefono {
 ```
 
 ### Usuario
+
+Entidad para gestión de usuarios de la aplicación.
 
 ```java
 @Entity
