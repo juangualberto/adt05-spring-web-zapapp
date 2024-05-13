@@ -526,7 +526,5 @@ El método POST confirma el pedido, guarda los precios actuales en *LíneaPedido
 
 
 
-## Ejemplo de controlador sencillo
-
 \pagebreak
 

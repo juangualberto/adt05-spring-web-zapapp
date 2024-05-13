@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -24,12 +23,12 @@ import com.iesvdc.acceso.zapateria.zapapp.repositorios.RepoProducto;
 import com.iesvdc.acceso.zapateria.zapapp.repositorios.RepoTelefono;
 import com.iesvdc.acceso.zapateria.zapapp.repositorios.RepoUsuario;
 
+import jakarta.transaction.Transactional;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -136,18 +135,30 @@ public class ControCarrito {
     @GetMapping("/carro/add/{id}")
     public String addForm(
         @PathVariable @NonNull Long id, Model modelo) {
-        
-        String vista = "carro/carro-add";
-        Optional <Producto> producto = repoProducto.findById(id);
+
+        Optional <Producto> producto = repoProducto.findById(id);        
 
         if (producto.isPresent()){ 
+            // Si el producto está ya en el carro, haremos un "edit"
+            List<Pedido> pedidos = repoPedido.findByEstadoAndCliente(Estado.CARRITO, getLoggedUser());
+            if (pedidos.size()>0) {
+                Pedido carro = pedidos.get(0);
+                for (LineaPedido lp : carro.getLineaPedidos()) {
+                    if(lp.getProducto().getId()==id) {
+                        modelo.addAttribute("lineaPedido", lp);
+                        modelo.addAttribute("producto", lp.getProducto());
+                        modelo.addAttribute("cantidad", lp.getCantidad());
+                        return "carro/carro-edit";                        
+                    }
+                }
+            }
             modelo.addAttribute("producto", producto.get());            
         } else {
             modelo.addAttribute("titulo", "Error al añadir al carrito");
             modelo.addAttribute("mensaje", "No se ha podido encontrar ese producto en la base de datos");
-            vista = "error";
+            return "error";
         } 
-        return vista;
+        return "carro/carro-add";
     }
 
 
@@ -182,10 +193,18 @@ public class ControCarrito {
             carrito.setEstado(Estado.CARRITO);
             carrito = repoPedido.save(carrito);
         }
-        // ahora añadimos una línea al pedido
+        // ahora añadimos una línea al pedido        
         if (producto.isPresent() && cantidad>0 ){ 
-            if (cantidad < producto.get().getStock()) {
-                LineaPedido lineaPedido = new LineaPedido();
+            LineaPedido lineaPedido = new LineaPedido();
+            // TEST para ver si ya estaba en el carro el producto
+            for (LineaPedido lp : carrito.getLineaPedidos()) {
+                if(lp.getProducto().getId()==id) {
+                    cantidad = lp.getCantidad()+cantidad;
+                    lineaPedido = lp;
+                }
+            }
+            // TEST para ver si queda stock
+            if (cantidad < producto.get().getStock()) {                
                 lineaPedido.setProducto(producto.get());
                 lineaPedido.setCantidad(cantidad);
                 lineaPedido.setPedido(carrito);
@@ -379,9 +398,10 @@ public class ControCarrito {
     }
     
     @PostMapping("/carro/confirmar")
+    @Transactional(rollbackOn = Exception.class)
     public String confirm(
         @ModelAttribute("lineaPedido") @NonNull Pedido pedido,
-        Model modelo) {
+        Model modelo) throws Exception {
 
         Usuario loggedUser = getLoggedUser();
         long total = 0;            
@@ -397,20 +417,27 @@ public class ControCarrito {
                 for (LineaPedido lp : pedidos.get(0).getLineaPedidos()) {
                     // comprobamos si hay stock
                     Producto p = lp.getProducto();
-                    if (p.getStock()<=lp.getCantidad()) {
+                    if (p.getStock()>=lp.getCantidad()) {
                         lp.setPrecio(lp.getProducto().getPrecio());
                         total += lp.getCantidad()*lp.getProducto().getPrecio();
                         p.setStock(p.getStock()-lp.getCantidad());
                         repoProducto.save(p);
                     } else {
-                        modelo.addAttribute("titulo", "Error al confirmar el pedido");
-                        modelo.addAttribute("mensaje", 
+                        throw new Exception(
                             "No queda suficiente stock de: " + 
                             p.getNombre() + 
                             " para completar el pedido. Sólo quedan: " + 
                             p.getStock()+" unidades y en el pedido se solicitan: " + 
                             lp.getCantidad()+". Intente poner menos unidades para completar el pedido.");
-                        return "error";
+
+                        // modelo.addAttribute("titulo", "Error al confirmar el pedido");
+                        // modelo.addAttribute("mensaje", 
+                        //     "No queda suficiente stock de: " + 
+                        //     p.getNombre() + 
+                        //     " para completar el pedido. Sólo quedan: " + 
+                        //     p.getStock()+" unidades y en el pedido se solicitan: " + 
+                        //     lp.getCantidad()+". Intente poner menos unidades para completar el pedido.");
+                        // return "error";
                     }
                 }
                 pedido.setTotal(Float.valueOf(total));

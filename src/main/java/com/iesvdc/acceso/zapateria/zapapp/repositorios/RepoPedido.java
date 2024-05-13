@@ -19,6 +19,7 @@ public interface RepoPedido extends JpaRepository <Pedido, Long>{
 
     List<Pedido> findByEstadoAndCliente(Estado estado, Usuario cliente);
     List<Pedido> findByCliente(Usuario cliente);
+    List<Pedido> findByOperario(Usuario operario);
     List<Pedido> findByEstadoAndOperario(Estado estado, Usuario operario);
     
 }

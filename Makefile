@@ -3,7 +3,7 @@ PANDO = pandoc
 FLAGS = --top-level-division=chapter --listings -o
 
 all:
-	$(PANDO) 0*.md 10-Bibliografia.md -o Libro.pdf --template docs/eisvogel --listings --number-sections
+	$(PANDO) 0*.md 1*.md -o Libro.pdf --template docs/eisvogel --listings --number-sections
 
 clean:
 	rm *aux

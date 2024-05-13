@@ -19,6 +19,8 @@ import com.iesvdc.acceso.zapateria.zapapp.repositorios.RepoUsuario;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -99,6 +101,60 @@ public class ControPedidos {
         modelo.addAttribute("pedidos", pedidos);
 
         return "/pedidos/pedidos";
+    }
+ 
+    @GetMapping("/en-preparacion/{id}")
+    public String prepararPedido(
+        @PathVariable Long id,
+        Model modelo){
+
+        Optional<Pedido> oPedido = repoPedido.findById(id);
+
+        modelo.addAttribute("pedido", oPedido.get());
+        
+        return "/pedidos/servir";        
+    }
+
+    @PostMapping("/en-preparacion/{id}")
+    public String setPedidoAsEnviado(
+        @PathVariable Long id,
+        Model modelo) {
+                
+        Optional<Pedido> oPedido = repoPedido.findById(id);
+
+        Pedido pedido = oPedido.get();
+        pedido.setEstado(Estado.ENVIADO);
+        pedido.setOperario(getLoggedUser());
+
+        repoPedido.save(pedido);
+        
+        return "redirect:/pedidos/enviados";
+    }
+
+    @GetMapping("/enviados")
+    public String findPedidosEnviados(
+        Model modelo){
+
+        Usuario usuario = getLoggedUser();
+        List<Pedido> pedidos = repoPedido.findByEstadoAndOperario(
+            Estado.ENVIADO, usuario);
+        
+        modelo.addAttribute("currentUrl", "/pedidos/en-preparacion");
+        modelo.addAttribute("pedidos", pedidos);
+
+        return "/pedidos/pedidos";
+    }
+
+    @GetMapping("/mis-pedidos")
+    public String findMyPedidos(
+        Model modelo) {
+        
+        Usuario usuario = getLoggedUser();
+        List<Pedido> pedidos = repoPedido.findByOperario(usuario);
+
+        modelo.addAttribute("pedidos", pedidos);
+        
+        return "pedidos/pedidos";
     }
     
 }
