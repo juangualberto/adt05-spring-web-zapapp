@@ -15,7 +15,7 @@ toc: false
 
 \pagebreak
 
-> Estos apuntes se han realizado para los alumnos de 2º de Ciclo Superior de Desarrollo de Aplicaciones Multiplataforma.
+> AVISO: El texto contiene muchos enlaces embebidos que sólo funcionan si se abre el PDF desde un lector digital. Si se imprime, se perderá mucha información interesante. No obstante, en el apartado "Bibliografía" se han añadido los enlaces para aquellos lectores que deseen una copia impresa y puedan ver la información. 
 
 ---
 
