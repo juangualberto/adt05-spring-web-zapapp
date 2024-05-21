@@ -44,14 +44,14 @@ Supongamos que tenemos un empleado con contrato A3GAN1 (un programador *senior*)
 
 | Coste anual | nº pagas | Coste mensual | Coste medio mes | 
 |-----------|----|---------|--------|
-| 28.850,23 | 14 | 2060,73 | 1030,37 |
-| 15.422,40 | 14 | 1101,6  | 550,8 |
+| 28.850,23 | 12 | 2404,19 | 1202,09 |
+| 15.422,40 | 12 | 1285,20 | 642,60 |
 
-Sólo en personal tenemos 1581,17€ sin impuestos. La empresa debe pagar impuesto de sociedades (tipo general del 25%) y recaudar IVA (21%), luego sin repercutir los costes de oficina, luz, comunicaciones, etc. hay que sumarle cerca de 800€ de ambos impuestos, lo que nos da un total de 2380€ para poder pagar los sueldos. 
+Sólo en personal tenemos 1.927,8€ sin impuestos. La empresa debe pagar impuesto de sociedades (tipo general del 25%) y recaudar IVA (21%), luego sin repercutir los costes de oficina, luz, comunicaciones, etc. hay que sumarle cerca de 800€ de ambos impuestos, lo que nos da un total aproximado de 2833 € para poder pagar los sueldos. 
 
-Si repercutimos el coste de alquiler de oficina (500€ al mes, medio mes 250€), comunicaciones y luz (200€ al mes, 100€ el medio mes), para no ir a pérdidas necesitamos pedir 2800€ por la aplicación.
+Si repercutimos el coste de alquiler de oficina (500€ al mes, medio mes 250€), comunicaciones y luz (200€ al mes, 100€ el medio mes), para no ir a pérdidas necesitamos pedir al menos 3500€ por la aplicación.
 
-*Para obtener un beneficio del 10% (ten en cuenta que luego suma IVA e impuesto de sociedades) nos vamos a bastante más de 3000€ por una tienda virtual.*
+*Para obtener un beneficio del 10% (ten en cuenta que luego suma IVA e impuesto de sociedades) nos vamos a cobrar al cliente bastante más de 4000€ por una tienda virtual.*
 
 **¿Estaría el cliente dispuesto a pagar esa cantidad por nuestro software a medida? Sólo si la calidad lo merece.**
 

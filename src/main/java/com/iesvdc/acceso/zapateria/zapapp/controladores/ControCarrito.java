@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.iesvdc.acceso.zapateria.zapapp.excepciones.CarroException;
 import com.iesvdc.acceso.zapateria.zapapp.modelos.Estado;
 import com.iesvdc.acceso.zapateria.zapapp.modelos.LineaPedido;
 import com.iesvdc.acceso.zapateria.zapapp.modelos.Pedido;
@@ -82,9 +83,11 @@ public class ControCarrito {
      */
     @GetMapping("/productos")
     public String findAll(Model modelo) {
+        List<Producto> productos = repoProducto.findAll();
+        productos.removeIf(producto -> producto.getStock()==0);
         modelo.addAttribute(
             "productos", 
-            repoProducto.findAll());
+            productos);
         return "carro/productos";
     }
     
@@ -184,27 +187,31 @@ public class ControCarrito {
 
         List<Pedido> pedidos = repoPedido.findByEstadoAndCliente(Estado.CARRITO, cliente);
 
-        // si no existe carro de la compra se crea
-        if (pedidos.size()>0) {
-            carrito = pedidos.get(0);
-        } else {
-            carrito = new Pedido();
-            carrito.setCliente(cliente);
-            carrito.setEstado(Estado.CARRITO);
-            carrito = repoPedido.save(carrito);
-        }
         // ahora añadimos una línea al pedido        
         if (producto.isPresent() && cantidad>0 ){ 
+            // si no existe carro de la compra se crea
+            if (pedidos.size()>0) {
+                carrito = pedidos.get(0);
+            } else {
+                carrito = new Pedido();
+                carrito.setCliente(cliente);
+                carrito.setEstado(Estado.CARRITO);
+                carrito = repoPedido.save(carrito);
+            }
             LineaPedido lineaPedido = new LineaPedido();
-            // TEST para ver si ya estaba en el carro el producto
-            for (LineaPedido lp : carrito.getLineaPedidos()) {
-                if(lp.getProducto().getId()==id) {
-                    cantidad = lp.getCantidad()+cantidad;
-                    lineaPedido = lp;
+
+            if (carrito.getLineaPedidos()!= null) {
+                // TEST para ver si ya estaba en el carro el producto
+                for (LineaPedido lp : carrito.getLineaPedidos()) {
+                    if(lp.getProducto().getId()==id) {
+                        cantidad = lp.getCantidad()+cantidad;
+                        lineaPedido = lp;
+                    }
                 }
             }
+
             // TEST para ver si queda stock
-            if (cantidad < producto.get().getStock()) {                
+            if (cantidad <= producto.get().getStock()) {                
                 lineaPedido.setProducto(producto.get());
                 lineaPedido.setCantidad(cantidad);
                 lineaPedido.setPedido(carrito);
@@ -398,10 +405,10 @@ public class ControCarrito {
     }
     
     @PostMapping("/carro/confirmar")
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional(rollbackOn = CarroException.class)
     public String confirm(
         @ModelAttribute("lineaPedido") @NonNull Pedido pedido,
-        Model modelo) throws Exception {
+        Model modelo) throws CarroException {
 
         Usuario loggedUser = getLoggedUser();
         long total = 0;            
@@ -423,21 +430,14 @@ public class ControCarrito {
                         p.setStock(p.getStock()-lp.getCantidad());
                         repoProducto.save(p);
                     } else {
-                        throw new Exception(
+                        throw new CarroException(
                             "No queda suficiente stock de: " + 
                             p.getNombre() + 
                             " para completar el pedido. Sólo quedan: " + 
-                            p.getStock()+" unidades y en el pedido se solicitan: " + 
-                            lp.getCantidad()+". Intente poner menos unidades para completar el pedido.");
-
-                        // modelo.addAttribute("titulo", "Error al confirmar el pedido");
-                        // modelo.addAttribute("mensaje", 
-                        //     "No queda suficiente stock de: " + 
-                        //     p.getNombre() + 
-                        //     " para completar el pedido. Sólo quedan: " + 
-                        //     p.getStock()+" unidades y en el pedido se solicitan: " + 
-                        //     lp.getCantidad()+". Intente poner menos unidades para completar el pedido.");
-                        // return "error";
+                            p.getStock()+
+                            " unidades y en el pedido se solicitan: " + 
+                            lp.getCantidad() + 
+                            ". Intente poner menos unidades para completar el pedido.");
                     }
                 }
                 pedido.setTotal(Float.valueOf(total));

@@ -98,7 +98,36 @@ public class SecurityConfiguration {
 
 Aquí vemos cómo buscar en la base de datos el usuario, contraseña y rol. Fíjate como Spring nos obliga a tener un campo *enabled* para el usuario.
 
-Para cada autoridad decimos qué rutas son accesibles. Aunque no lo vemos, estamos creando un filtro para un servlet.
+Para cada autoridad decimos qué rutas son accesibles. Aunque no lo vemos, estamos creando un filtro para el servidor de aplicaciones Java.
+
+Posteriormente, desde los controladores, podemos preguntar a Spring quién y con qué autoridad hizo login. Veamos un ejemplo de cómo ver el usuario que hizo login:
+
+```java
+Antes de comenzar, al tratarse de un proceso de compra, que es individual e intransferible, vamos a necesitar un método en el controlador que nos diga el usuario que ha iniciado la sesión, para ello del contexto de la aplicación podemos obtener información de la autenticación:
+
+```java
+    /**
+     * 
+     * Este método obtiene, del contexto de 
+     * la aplicación, información sobre la 
+     * autenticación.
+     * Devuelve un objeto de tipo Usuario 
+     * que es además quien ha entrado en 
+     * la aplicación.
+     * 
+     * @return Usuario 
+     */
+    private Usuario getLoggedUser() {
+        // Del contexto de la aplicación obtenemos el usuario
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // obtenemos el usuario del repositorio por su "username"
+        Usuario cliente = repoUsuario.findByUsername(username).get(0);
+
+        return cliente;
+    }
+```
+```
 
 \pagebreak
 

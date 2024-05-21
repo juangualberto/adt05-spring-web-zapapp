@@ -68,7 +68,8 @@ public class ControUsuarios {
      */
     @PostMapping("/add")
     public String addUsuario(
-            @ModelAttribute("usuario") @NonNull Usuario usuario) {
+            @ModelAttribute("usuario") @NonNull Usuario usuario) {        
+        
         List<Direccion> direcciones = usuario.getDirecciones();
         if (direcciones != null) {
             for (Direccion direccion : direcciones) {
@@ -144,7 +145,7 @@ public class ControUsuarios {
             modelo.addAttribute(
                     "usuario", oUsuario.get());
             modelo.addAttribute(
-                    "roles", Rol.values());
+                    "listaRoles", Rol.values());
             return "admin/usuarios/edit";
         } else {
             modelo.addAttribute("mensaje", "El usuario consultado no existe.");

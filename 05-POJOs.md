@@ -159,7 +159,10 @@ public class LineaPedido {
 
 ### Pedido 
 
-Hay que destacar en los pedidos que un carro de la compra es un pedido con estado "CARRITO". La lógica de la aplicación sólo debe permitir un carro de la compra por usuario, es decir, un pedido en estado "CARRITO". Por seguridad esto se puede controlar también con un disparador, de manera que por cada usuario 
+Hay que destacar en los pedidos que un carro de la compra es un pedido con estado "CARRITO". La lógica de la aplicación sólo debe permitir un carro de la compra por usuario, es decir, un pedido en estado "CARRITO". Por seguridad esto se puede controlar también con un disparador, de manera que por cada usuario no tengamos nada más que un carro de la compra. El carrito puede tener dos estrategias a la hora de eliminar los productos de stock:
+
+1) El carrito tiene un "tiempo de vida" que nos reserva los productos por un tiempo, pasado ese tiempo, el contenido del carrito "se borra".
+2) El carrito sólo quita del stock cuando confirmamos la compra y estamos listos para pagar. En ese momento, si no hay stock, nos debe avisar lanzando algún tipo de excepción.
 
 ```java
 @Entity

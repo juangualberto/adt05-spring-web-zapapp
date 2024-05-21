@@ -22,7 +22,7 @@ Para completar la aplicación, se definen una serie de end-points que serán com
 ### Servicio usuario
 
   RUTA          |VERBO| DATOS | COMENTARIOS
-----------------|-----|-------|------------------------------
+------------------------|-----|-------|--------------------
 /usuario/telefonos | GET | nada | Muestra los tel. del usuario que ha hecho login
 /usuario/telefonos/add | GET | nada | Muestra formulario para añadir tel. al usuario que ha hecho login
 /usuario/telefonos/add | POST | body (tel) | Añade tel. al usuario que ha hecho login
@@ -36,7 +36,7 @@ Para completar la aplicación, se definen una serie de end-points que serán com
 Rutas del servicio para el rol GESTOR:
 
 RUTA            | METODO | ROL | Observaciones
-----------------|--------|---------|-----------------------------
+--------------------|--------|---------|-------------------------
 /admin/producto | GET | gestor | Mostrar listado productos
 /admin/producto/create | GET | gestor | Mostrar formulario alta productos
 /admin/producto/create | POST | gestor | Crear en la BBDD el producto
@@ -395,10 +395,9 @@ RUTA            | METODO | ROL | Observaciones
 
 El operario gestiona los pedidos. Ve el listado de pedidos sin procesar y en el momento que cambia un pedido a "en proceso" se le asigna y será el encargado de enviarlo. Igualmente también debe tener un listado de pedidos "en preparación", "enviados" y "completados". Tendremos un maestro-detalle en función del estado y del operario. 
 
-RUTA            | METODO | Datos    | Observaciones
-----------------|--------|----------|--------------
-/pedidos        | GET    | nada     | Listado de pedidos en estado 
-"REALIZADO"
+RUTA            | Verbo | Datos    | Observaciones
+-----------------------|-----|---------|-------------
+/pedidos        | GET    | nada     | Listado de pedidos en estado "REALIZADO"
 /pedidos/{id}        | GET    | ID del pedido     | Formulario ¿desea servir este pedido?
 /pedidos/{id}        | POST    | ID del pedido     | Se le asigna al operario que hizo login ese pedido
 /pedidos/estado/{estado}   | GET    | estado     | Listado de pedidos en ese estado para el operario que ha hecho LOGIN
@@ -411,7 +410,7 @@ RUTA            | METODO | Datos    | Observaciones
 Un usuario con perfil cliente gestiona su carro de la compra:
 
 RUTA            | METODO | Datos | Observaciones
-----------------|--------|---------|--------------
+------------|--------|---------|----------------------
 /carro | GET | Nada | Ver la cesta de la compra
 /carro/add/{id} | GET | ID de producto y cantidad | Formulario para añadir productos al carro
 /carro/add/{id} | POST | ID de producto y cantidad | Añade realmente el producto al carro

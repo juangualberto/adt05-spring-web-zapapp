@@ -44,7 +44,7 @@
                             <tr th:each="direccion, itemDir : *{direcciones}">
                                 <td>
                                     <input th:field="*{direcciones[__${itemDir.index}__].id}" type="hidden" />
-                                    <input th:field="*{direcciones[__${itemDir.index}__].localidad}" type="hidden" />
+                                    <input th:field="*{direcciones[__${itemDir.index}__].codigoPostal.municipio}" type="hidden" />
                                     <input class="form-control"
                                         th:field="*{direcciones[__${itemDir.index}__].tipoVia}" />
                                 </td>
@@ -86,17 +86,29 @@
 
                     <div class="col-md-8">
                         <label class="form-label">Teléfonos:</label>
-                        <div class="row">
-                            <div class="col">Código País</div>
-                            <div class="col">Número de Teléfono</div>
-                        </div>
-                        <div class="row" th:each="telefono, itemTelefono : *{telefonos}">
-                            <input th:field="*{telefonos[__${itemTelefono.index}__].id}" type="hidden" />
-                            <input class="form-control col" type="number" min="1" max="2000"
-                                th:field="*{telefonos[__${itemTelefono.index}__].codigoPais}" />
-                            <input class="form-control col" type="number" min="1" max="999999999"
-                                th:field="*{telefonos[__${itemTelefono.index}__].numero}" />
-                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Código País</th>
+                                    <th>Número de Teléfono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="telefono, itemTelefono : *{telefonos}">
+                                    <td>
+                                        <input th:field="*{telefonos[__${itemTelefono.index}__].id}" type="hidden" />
+                                        <input class="form-control col" type="number" min="1" max="2000"
+                                            th:field="*{telefonos[__${itemTelefono.index}__].codigoPais}" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control col" type="number" min="1" max="999999999"
+                                        th:field="*{telefonos[__${itemTelefono.index}__].numero}" />
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        
                         <div class="row-md-6 pt-2">
                             <div class="col">
                                 <a th:href="|/admin/usuarios/${usuario.id}/telefonos/add|" class="btn btn-success p-2">Añadir teléfono</a>
@@ -105,17 +117,19 @@
                         </div>
 
                     </div>
-                    <div class="col-md-4">
-                        <div class="justify-content-center text-center">
-                        <label class="form-label">Roles:
-                            <select th:field="*{roles}" multiple="multiple" class="form-select">
-                                <option th:each="rol : ${roles}" th:value="${rol.id}"
-                                    th:selected="${#lists.contains(usuario.roles, rol)} ? 'selected' : 'false'"
-                                    th:text="${rol.nombre}">
-                                </option>
-                            </select>
-                        </label>
-                    </div>                    
+                    <div class="col-md-4">                        
+                        <label class="form-label">Roles:</label>
+                        <!--<select th:field="*{roles}" multiple="multiple" class="form-select">
+                             <option th:each="rol : ${listaRoles}" th:value="${rol.id}"
+                                th:selected="${#lists.contains(usuario.roles, rol)} ? 'selected' : 'false'"
+                                th:text="${rol.nombre}">
+                            </option> 
+                            <option th:each="rol,estado : ${roles}" th:value="${estado.index}" th:text="${rol}"></option>
+                        </select>-->
+                        <select th:field="*{roles}" multiple="multiple" class="form-select">
+                            <option th:each="rol,estado : ${listaRoles}" th:value="${estado.index}" th:text="${rol}"></option>
+                        </select>                        
+                    </div> 
                 </div>
             </div>
             <div class="border">
