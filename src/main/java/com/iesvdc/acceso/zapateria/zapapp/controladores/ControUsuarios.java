@@ -2,6 +2,8 @@ package com.iesvdc.acceso.zapateria.zapapp.controladores;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -59,7 +61,7 @@ public class ControUsuarios {
         modelo.addAttribute("usuario", new Usuario());
         modelo.addAttribute("telefonos", repoTelefono.findAll());
         modelo.addAttribute("direcciones", repoDireccion.findAll());
-        modelo.addAttribute("roles", Rol.values());
+        modelo.addAttribute("listaRoles", Rol.values());
         return "admin/usuarios/add";
     }
 
@@ -146,6 +148,10 @@ public class ControUsuarios {
                     "usuario", oUsuario.get());
             modelo.addAttribute(
                     "listaRoles", Rol.values());
+            List<Rol> usuarioRoles = oUsuario.get()
+                .getRoles().stream()
+                .map(RolUsuario::getRol).collect(Collectors.toList());
+            modelo.addAttribute("usuarioRoles", usuarioRoles);
             return "admin/usuarios/edit";
         } else {
             modelo.addAttribute("mensaje", "El usuario consultado no existe.");
