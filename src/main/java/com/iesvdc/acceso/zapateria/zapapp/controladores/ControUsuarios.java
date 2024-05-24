@@ -1,5 +1,6 @@
 package com.iesvdc.acceso.zapateria.zapapp.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iesvdc.acceso.zapateria.zapapp.modelos.Direccion;
 import com.iesvdc.acceso.zapateria.zapapp.modelos.Rol;
@@ -70,8 +73,17 @@ public class ControUsuarios {
      */
     @PostMapping("/add")
     public String addUsuario(
-            @ModelAttribute("usuario") @NonNull Usuario usuario) {        
+            @ModelAttribute("usuario") @NonNull Usuario usuario,
+            @RequestParam(name = "roles_usuario", required = false) List<String> listaRoles){        
         
+        if (usuario.getPassword().length()<2) {
+                usuario.setPassword(repoUsuario.findById(usuario.getId()).get().getPassword());
+        } else {
+                usuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
+        }
+
+        repoUsuario.save(usuario);
+
         List<Direccion> direcciones = usuario.getDirecciones();
         if (direcciones != null) {
             for (Direccion direccion : direcciones) {
@@ -79,6 +91,7 @@ public class ControUsuarios {
                     repoDireccion.save(direccion);
             }
         }
+        
         List<Telefono> telefonos = usuario.getTelefonos();
         if (telefonos != null) {
             for (Telefono telefono : telefonos) {
@@ -86,14 +99,19 @@ public class ControUsuarios {
                     repoTelefono.save(telefono);
             }
         }
-        List<RolUsuario> roles = usuario.getRoles();
-        if (roles != null) {
-            for (RolUsuario ru : roles) {
-                if (ru != null)
-                    repoRolUsuario.save(ru);
-            }
-        }
-        repoUsuario.save(usuario);
+
+        // borramos todos los permisos antiguos
+        repoRolUsuario.deleteAll(repoRolUsuario.findByUsuario(usuario));
+        // damos los nuevos permisos
+        if (listaRoles!=null)
+                for (String rol : listaRoles) {
+                        RolUsuario ru = new RolUsuario();
+                        ru.setUsuario(usuario);
+                        ru.setRol(Rol.valueOf(rol));
+                        repoRolUsuario.save(ru);                        
+                }
+         
+        
 
         return "redirect:/admin/usuarios";
     }

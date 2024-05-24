@@ -62,8 +62,8 @@
                     <div class="row g-3 m-2">
                         <div class="col-md-6">
                             <label class="form-label">Roles:
-                                <select th:field="*{roles}" multiple="multiple" class="form-select">
-                                    <option th:each="rol,estado : ${roles}" th:value="${estado.index}" th:text="${rol}"></option>
+                                <select name="roles_usuario" multiple="multiple" class="form-select">
+                                    <option th:each="rol,estado : ${listaRoles}" th:value="${rol}" th:text="${rol}"></option>
                                 </select>
                             </label>
                         </div>

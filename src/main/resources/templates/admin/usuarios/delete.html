@@ -64,21 +64,12 @@
                     </div>
                 </div>
                 <div class="border">
-                    <div class="row g-3 m-2">
-                        <!-- <div class="col-md-6">
-                            <label class="form-label">Teléfono:
-                                <select th:field="*{telefono}" class="form-select">
-                                    <option th:each="telefono : ${telefonos}" th:value="${telefono.numero}"
-                                        th:text="${telefono.numero}"></option>
-                                </select>
-                            </label>
-                        </div> -->
+                    <div class="row g-3 m-2">                      
                         <div class="col-md-6">
-                            <label class="form-label">Roles:
-                                <select th:field="*{roles}" multiple="multiple" class="form-select" disabled>
-                                    <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
-                                </select>
-                            </label>
+                            <p>Roles:</p>
+                            <ol>
+                                <li th:each="rol : ${usuario.roles}" th:text="${rol.rol}"></li>
+                            </ol>
                         </div>
                     </div>
                 </div>

@@ -14,161 +14,179 @@
         <h3>Editar usuario:</h3>
 
         <div class="mb-2">
-        <form th:action="|/admin/usuarios/add|" th:object="${usuario}" method="post" class="form">
-            <input hidden th:field="${usuario.id}" />
-            <div class="border p-2">
-                <div class="row g-3 mt-2">
-                    <div class="col-md-6">
-                        <label class="form-label">Nombre: </label>
-                        <input type="text" th:field="*{nombre}" class="form-control" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Apellido: </label>
-                        <input type="text" th:field="*{apellido}" class="form-control" />
+            <form th:action="|/admin/usuarios/add|" th:object="${usuario}" method="post" class="form">
+                <input hidden th:field="${usuario.id}" />
+                <div class="border p-2">
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre: </label>
+                            <input type="text" th:field="*{nombre}" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Apellido: </label>
+                            <input type="text" th:field="*{apellido}" class="form-control" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="border p-2 mt-2">
-                <label class="form-label">Direcciones:</label>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <th>Tipo Via</th>
-                            <th>Nombre Via</th>
-                            <th>Número Via</th>
-                            <th>Planta</th>
-                            <th>Puerta</th>
-                            <th>Portal</th>
-                            <th>CP</th>
-                        </thead>
-                        <tbody>
-                            <!-- <tr th:if="${#lists.isEmpty(direcciones)}">
+                <div class="border p-2 mt-2">
+                    <label class="form-label">Direcciones:</label>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <th>Tipo Via</th>
+                                <th>Nombre Via</th>
+                                <th>Número Via</th>
+                                <th>Planta</th>
+                                <th>Puerta</th>
+                                <th>Portal</th>
+                                <th>CP</th>
+                            </thead>
+                            <tbody>
+                                <!-- <tr th:if="${#lists.isEmpty(direcciones)}">
                                 <td colspan="4"> Sin direcciones aún. </td>
                             </tr> -->
-                            <tr th:each="direccion, itemDir : *{direcciones}">
-                                <td>
-                                    <input th:field="*{direcciones[__${itemDir.index}__].id}" type="hidden" />
-                                    <input th:field="*{direcciones[__${itemDir.index}__].codigoPostal.id}"
-                                        type="hidden" />
-                                    <input class="form-control"
-                                        th:field="*{direcciones[__${itemDir.index}__].tipoVia}" />
-                                </td>
-                                <td>
-                                    <input class="form-control"
-                                        th:field="*{direcciones[__${itemDir.index}__].nombreVia}" />
-                                </td>
-                                <td>
-                                    <input class="form-control"
-                                        th:field="*{direcciones[__${itemDir.index}__].numero}" />
-                                </td>
-                                <td>
-                                    <input class="form-control"
-                                        th:field="*{direcciones[__${itemDir.index}__].planta}" />
-                                </td>
-                                <td>
-                                    <input class="form-control"
-                                        th:field="*{direcciones[__${itemDir.index}__].puerta}" />
-                                </td>
-                                <td>
-                                    <input class="form-control"
-                                        th:field="*{direcciones[__${itemDir.index}__].portal}" />
-                                </td>
-                                <td>
-                                    <input class="form-control"
-                                        th:field="*{direcciones[__${itemDir.index}__].codigoPostal.codigoPostal}" disabled/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="row-md-6 pt-2 m-2">
-                        <div class="col">
-                            <a href="#" class="btn btn-success p-2">Añadir dirección</a>
-                            <a href="#" class="btn btn-warning p-2">Gestión direcciónes</a>
+                                <tr th:each="direccion, itemDir : *{direcciones}">
+                                    <td>
+                                        <input th:field="*{direcciones[__${itemDir.index}__].id}" type="hidden" />
+                                        <input th:field="*{direcciones[__${itemDir.index}__].codigoPostal.id}"
+                                            type="hidden" />
+                                        <input class="form-control"
+                                            th:field="*{direcciones[__${itemDir.index}__].tipoVia}" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                            th:field="*{direcciones[__${itemDir.index}__].nombreVia}" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                            th:field="*{direcciones[__${itemDir.index}__].numero}" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                            th:field="*{direcciones[__${itemDir.index}__].planta}" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                            th:field="*{direcciones[__${itemDir.index}__].puerta}" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                            th:field="*{direcciones[__${itemDir.index}__].portal}" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                            th:field="*{direcciones[__${itemDir.index}__].codigoPostal.codigoPostal}"
+                                            disabled />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row-md-6 pt-2 m-2">
+                            <div class="col">
+                                <a href="#" class="btn btn-success p-2">Añadir dirección</a>
+                                <a href="#" class="btn btn-warning p-2">Gestión direcciones</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="border mt-2 p-2">
-                <div class="row g-3 m-2">
-                    <div class="col-md-4">
-                        <label class="form-label">Nombre de usuario: </label>
-                        <input type="text" th:field="*{username}" class="form-control" />
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="email">Email:</label>
-                        <input type="email" name="email" th:field="*{email}" class="form-control" />
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Contraseña:</label>
-                        <input type="password" th:field="*{password}" class="form-control" />
-                    </div>
-                </div>
-            </div>            
-            <div class="row g-3 p-2">
-
-                <div class="col-md-8 border p-2">
-                    <label class="form-label">Teléfonos:</label>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Código País</th>
-                                <th>Número de Teléfono</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="telefono, itemTelefono : *{telefonos}">
-                                <td>
-                                    <input th:field="*{telefonos[__${itemTelefono.index}__].id}" type="hidden" />
-                                    <input class="form-control col" type="number" min="1" max="2000"
-                                        th:field="*{telefonos[__${itemTelefono.index}__].codigoPais}" />
-                                </td>
-                                <td>
-                                    <input class="form-control col" type="number" min="1" max="999999999"
-                                        th:field="*{telefonos[__${itemTelefono.index}__].numero}" />
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <div class="row-md-6 p-2">
-                        <div class="col">
-                            <a th:href="|/admin/usuarios/${usuario.id}/telefonos/add|"
-                                class="btn btn-success p-2">Añadir teléfono</a>
-                            <a th:href="|/admin/usuarios/${usuario.id}/telefonos|"
-                                class="btn btn-warning p-2">Gestión teléfonos</a>
+                <div class="border mt-2 p-2">
+                    <div class="row g-3 m-2">
+                        <div class="col-md-4">
+                            <label class="form-label">Nombre de usuario: </label>
+                            <input type="text" th:field="*{username}" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="email">Email:</label>
+                            <input type="email" name="email" th:field="*{email}" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Contraseña:</label>
+                            <input type="password" th:field="*{password}" class="form-control" />
                         </div>
                     </div>
-
                 </div>
-                <div class="col-md-4 p-2 mt-2">
-                    <div class="border mx-auto p-2">
-                        <label class="form-label">Roles:</label>
-                        <select name="roles" class="form-select" multiple>
-                             <option th:each="rol,estado : ${listaRoles}" th:value="${estado.index}" 
-                                th:selected="${#lists.contains(usuarioRoles, rol)} ? 'selected' : 'false'"
-                                th:text="${rol}">
-                            </option>
-                        </select>
+                <div class="row g-3 p-2">
 
-                        <!-- <div class="form-check" th:each="rol,estado : ${listaRoles}">
+                    <div class="col-md-8 border p-2">
+                        <label class="form-label">Teléfonos:</label>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Código País</th>
+                                    <th>Número de Teléfono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="telefono, itemTelefono : *{telefonos}">
+                                    <td>
+                                        <input th:field="*{telefonos[__${itemTelefono.index}__].id}" type="hidden" />
+                                        <input class="form-control col" type="number" min="1" max="2000"
+                                            th:field="*{telefonos[__${itemTelefono.index}__].codigoPais}" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control col" type="number" min="1" max="999999999"
+                                            th:field="*{telefonos[__${itemTelefono.index}__].numero}" />
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="row-md-6 p-2">
+                            <div class="col">
+                                <a th:href="|/admin/usuarios/${usuario.id}/telefonos/add|"
+                                    class="btn btn-success p-2">Añadir teléfono</a>
+                                <a th:href="|/admin/usuarios/${usuario.id}/telefonos|"
+                                    class="btn btn-warning p-2">Gestión teléfonos</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 p-2 mt-2">
+                        <div class="border mx-auto p-2">
+                            <!-- <label class="form-label">Roles:</label>
+                            <select name="roles" class="form-select" multiple>
+                                <option th:each="rol,estado : ${listaRoles}" th:value="${estado.index}"
+                                    th:selected="${#lists.contains(usuarioRoles, rol)} ? 'selected' : 'false'"
+                                    th:text="${rol}">
+                                </option>
+                            </select> -->
+
+                            <!-- <div class="form-check" th:each="rol,estado : ${listaRoles}">
                             <label class="form-check-label" th:text="${rol}" />
                             <input class="form-check-input" type="checkbox" 
                                 name="roles" id="roles" th:value="${estado.index}" 
                                 th:checked="#{lists.contains(usuarioRoles, rol)}"/>
                         </div>  -->
-                    </div>
-                </div>
 
-            </div>
-            <div class="border mb-2">
-                <div class="row g-3 m-2">
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Actualizar usuario</button>
-                        <a href="/admin/usuarios" class="btn btn-danger">Cancelar cambios</a>
+                            <label class="form-label">Roles:</label>
+                            <div>
+                                <div th:each="rol,estado : ${listaRoles}">
+                                    <input type="checkbox" th:id="'rol_' + ${estado.index}" name="roles_usuario"
+                                        th:value="${rol}"
+                                        th:checked="${#lists.contains(usuarioRoles, rol)} ? true : false" />
+                                    <label th:for="'rol_' + ${estado.index}" th:text="${rol}"></label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="border mt-2 p-2">
+                            <div class="form-check form-switch">
+                                <label class="form-check-label">Usuario activo</label>
+                                <input class="form-check-input" type="checkbox" role="switch" th:field="*{enabled}">                                
+                              </div>                              
+                        </div>
                     </div>
+
                 </div>
-        </form>
+                <div class="border mb-2">
+                    <div class="row g-3 m-2">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary">Actualizar usuario</button>
+                            <a href="/admin/usuarios" class="btn btn-danger">Cancelar cambios</a>
+                        </div>
+                    </div>
+            </form>
         </div>
         <div th:replace="~{fragmentos/general.html :: footer}"></div>
 
