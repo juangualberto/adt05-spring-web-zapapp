@@ -113,11 +113,17 @@ Por desgracia en este curso no tenemos tiempo de ver completamente Spring, pero 
 * **Inversión de control (IoC)**: Spring hace uso extensivo del patrón de diseño Inversión de Control (IoC), también conocido como Inyecci# ZapApp Spring Web 
 
 Spring Java nos permite desarrollar aplicaciones de manera más rápida, eficaz y corta, saltándonos tareas repetitivas y ahorrándonos lineas de código. En este proyecto vamos a desarrollar una aplicación Web que es una Zapatería online con Spring Boot.ón de Dependencias (DI). Esto permite que los objetos sean creados y administrados por el contenedor de Spring, en lugar de que las clases creen y administren sus propias dependencias. Esto promueve una arquitectura más modular y facilita la prueba unitaria y la reutilización de componentes.
+
 * **Spring MVC**: Es el módulo de Spring para el desarrollo de aplicaciones web basadas en el patrón Modelo-Vista-Controlador (MVC). Proporciona una estructura y conjunto de clases para construir fácilmente aplicaciones web, manejar solicitudes HTTP, administrar formularios, realizar validaciones, manejar sesiones, y mucho más.
+  
 * **Persistencia de datos**: Spring ofrece soporte para el acceso y la persistencia de datos mediante diferentes tecnologías y herramientas ORM como Hibernate, JPA, MyBatis y JDBC. Spring Data es un subproyecto de Spring que simplifica aún más el desarrollo de capas de persistencia mediante la generación automática de consultas, la gestión de transacciones y la integración con diversas bases de datos.
+  
 * **Seguridad**: Spring Security es otro módulo clave de Spring que proporciona funciones y herramientas para la implementación de la seguridad en aplicaciones web y de servicios. Ofrece autenticación y autorización, protección contra ataques, gestión de sesiones y más.
+  
 * **Integración**: Spring facilita la integración con otras tecnologías y sistemas mediante el soporte de numerosos protocolos y estándares, como SOAP, REST, JMS, RMI, entre otros. También ofrece integración con frameworks y bibliotecas populares, como Apache Kafka, RabbitMQ, Apache Solr, entre otros.
+  
 * **Programación orientada a aspectos (AOP)**: Spring ofrece soporte para la programación orientada a aspectos, lo que permite modularizar aspectos transversales de una aplicación, como la seguridad, la auditoría y el manejo de transacciones, separándolos del código principal y promoviendo una mejor separación de preocupaciones.
+  
 * Spring tiene como objetivo proporcionar una plataforma sólida y flexible para el **desarrollo de aplicaciones empresariales** en Java, simplificando tareas comunes, promoviendo las mejores prácticas y fomentando la modularidad y la reutilización de componentes.
 
 \pagebreak

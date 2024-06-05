@@ -1,4 +1,4 @@
-## Coste del desarrollo
+# Coste del desarrollo
 
 Según la [Resolución de 13 de julio de 2023, de la Dirección General de Trabajo, por la que se registra y publica el XVIII Convenio colectivo estatal de empresas de consultoría, tecnologías de la información y estudios de mercado y de la opinión pública. ](https://www.boe.es/eli/es/res/2023/07/13/(5)), los programadores pertenecemos al **Área 3, Desarrollo de software, Programación y Explotación de Sistemas**. Entre las las actividades de esta área están:
 

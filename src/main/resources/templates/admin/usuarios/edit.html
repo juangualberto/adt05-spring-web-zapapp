@@ -83,8 +83,8 @@
                         </table>
                         <div class="row-md-6 pt-2 m-2">
                             <div class="col">
-                                <a href="#" class="btn btn-success p-2">Añadir dirección</a>
-                                <a href="#" class="btn btn-warning p-2">Gestión direcciones</a>
+                                <a th:href="|/admin/usuarios/${usuario.id}/direcciones/add|" class="btn btn-success p-2">Añadir dirección</a>
+                                <a th:href="|/admin/usuarios/${usuario.id}/direcciones/edit|" class="btn btn-warning p-2">Gestión direcciones</a>
                             </div>
                         </div>
                     </div>

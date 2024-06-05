@@ -25,14 +25,16 @@ version: '3.1'
 services:
   db:
     image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    command: --mysql-native-password=ON
     restart: "no"
     environment:
-      MYSQL_ROOT_PASSWORD: zx76wbz7FG89k
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     networks:
       - skynet
     ports:
-      - 33306:3306
+      - ${MYSQL_HOST_PORT}:3306
+    volumes:
+        - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
 
   adminer:
     image: adminer
@@ -40,13 +42,23 @@ services:
     networks:
       - skynet
     ports:
-      - 8181:8080
+      - ${ADMINER_HOST_PORT}:8080
+    
 networks:
   skynet:
 
+
 ```
 
+> Fíjate cómo hemos usado variables de entorno que se cargan del fichero `.env` para configurar nuestros servicios. Este archivo **nunca** debes ponerlo en tus repositorios, porque estarías revelando tus credenciales, luego debes asegurarte de incluirlo en el `.gitignore`.
 
+Ejemplo de fichero **.env**:
+
+```bash
+MYSQL_ROOT_PASSWORD=zx76wbz7FG89k
+MYSQL_HOST_PORT=33306
+ADMINER_HOST_PORT=8181
+```
 
 \pagebreak
 

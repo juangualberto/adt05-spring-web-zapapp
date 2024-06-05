@@ -98,9 +98,6 @@ spec:
           containerPort: 80
 ```
 
-## 
-
-
 
 \pagebreak
 

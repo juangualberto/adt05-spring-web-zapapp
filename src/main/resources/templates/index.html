@@ -29,12 +29,17 @@
     </div>
 
     <div sec:authorize="hasAuthority('OPERARIO')" class="container">
-      <h3>Bienvenido <span th:text="${#authentication.name}"></span> a Zapato Veloz </h3>
+      <h3>El Operario <span th:text="${#authentication.name}"></span> entró a Zapato Veloz </h3>
       <p> Pulse para comenzar a 
       <a href="/pedidos" class="btn btn-info"> 
         <i class="fa-solid fa-bag-shopping"></i> Atender pedidos
       </a>
       </p>
+    </div>
+
+    <div sec:authorize="hasAuthority('GESTOR')" class="container">
+      <h3>Detectado acceso como administrador</h3>
+      <p>El usuario <span th:text="${#authentication.name}"></span> entró a Zapato Veloz </p>
     </div>
 
   <div th:replace="~{fragmentos/general.html :: footer}"></div>

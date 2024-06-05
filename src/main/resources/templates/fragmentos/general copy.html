@@ -12,7 +12,7 @@
 <body>
     <div class="container-fluid">
         <div th:fragment="navigation">
-            <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <nav sec:authorize="hasAuthority('GESTOR')" class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="/">Zapato veloz</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -24,7 +24,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Inicio </a>
                             </li>
-                            <li sec:authorize="hasAuthority('GESTOR')" class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Usuarios
@@ -36,7 +36,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li sec:authorize="hasAuthority('GESTOR')" class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Categorías
@@ -48,7 +48,7 @@
                                             href="/admin/categoria/add">Alta</a></li>
                                 </ul>
                             </li>
-                            <li sec:authorize="hasAuthority('GESTOR')" class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Productos y precios
@@ -63,8 +63,30 @@
                                 </ul>
                             </li>
 
-                            
-                            <li sec:authorize="hasAnyAuthority('CLIENTE', 'OPERARIO')" class="nav-item dropdown">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ayuda">Ayuda </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/acerca">Sobre esta Web </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Desconexión </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+            <nav sec:authorize="hasAuthority('CLIENTE')" class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Zapato veloz</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <i class="fa-regular fa-user"></i> | Mis datos
@@ -78,21 +100,51 @@
                                                 class="fa-solid fa-address-book"></i> Direcciones </a></li>
                                 </ul>
                             </li>
-                            <li sec:authorize="hasAuthority('CLIENTE')" class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="/productos"> <i class="fa-solid fa-cart-plus"></i> | Comprar
                                 </a>
                             </li>
-                            <li sec:authorize="hasAuthority('CLIENTE')" class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="/carro"> <i class="fa-solid fa-cart-shopping"></i> | Carrito
                                 </a>
                             </li>
-                            <li sec:authorize="hasAuthority('CLIENTE')" class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="/mis-pedidos"> <i class="fa-solid fa-list"></i> | Mis pedidos
                                 </a>
                             </li>
-                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ayuda"><i class="fa-solid fa-question"></i> | Ayuda </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/acerca"><i class="fa-solid fa-circle-info"></i> | Sobre esta
+                                    Web </a>
+                            </li>
 
-                            <li sec:authorize="hasAuthority('OPERARIO')" class="nav-item dropdown">
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> |
+                                    Desconexión </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+            <nav sec:authorize="hasAuthority('OPERARIO')" class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Zapato veloz</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Inicio </a>
+                            </li>
+
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Gestión Pedidos
@@ -100,7 +152,7 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a id="menu_modulo" class="dropdown-item" href="/pedidos">
-                                            Para preparar </a>
+                                            Listar Pedidos </a>
                                     </li>
                                     <li>
                                         <a id="menu_enseñanza" class="dropdown-item" href="/pedidos/en-preparacion">
@@ -117,8 +169,8 @@
                                 </ul>
                             </li>
 
-                            <li sec:authorize="hasAuthority('OPERARIO')" class="nav-item">
-                                <a class="nav-link" href="/pedidos"> Pedidos para servir </a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/pedidos"> Listar pedidos </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/ayuda">Ayuda </a>
@@ -126,7 +178,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/acerca">Sobre esta Web </a>
                             </li>
-                            <li sec:authorize="hasAnyAuthority('CLIENTE', 'OPERARIO', 'GESTOR')" class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="/logout">Desconexión </a>
                             </li>
                         </ul>
@@ -134,7 +186,33 @@
                     </div>
                 </div>
             </nav>
-            
+            <nav sec:authorize="hasAuthority('ROLE_ANONYMOUS')" class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Zapato veloz</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Inicio </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ayuda">Ayuda </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/acerca">Sobre esta Web </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Entrar en el sistema </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
         </div>
 
         <div th:fragment="header">

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Su Zapatería Online: Mis direcciones</title>
+  <th:block th:replace="~{fragmentos/general.html :: headerfiles}"></th:block>
+</head>
+
+<body>  
+  <div th:replace="~{fragmentos/general.html :: navigation}"> </div>
+  <div class="container">
+    
+    <h4>
+        Listando Direcciones del usario: 
+        <span th:text="${usuarioActual.username}"></span>
+    </h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Denominación</th> 
+                <th>Ciudad</th>
+                <th>Tipo vía</th>
+                <th>Vía</th>
+                <th>Número</th>
+                <th>Planta</th>
+                <th>Puerta</th>
+                <th>Portal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>            
+            <tr th:each="direccion: ${direcciones}">
+                <th th:text="${direccion.nombre}"></th>
+                <td th:text="${direccion.codigoPostal.municipio}"></td>
+                <td th:text="${direccion.tipoVia}"></td>
+                <td th:text="${direccion.nombreVia}"></td>
+                <td th:text="${direccion.numero}"></td>
+                <td th:text="${direccion.planta}"></td>
+                <td th:text="${direccion.puerta}"></td>
+                <td th:text="${direccion.portal}"></td>
+                <td>
+                    <a class="btn btn-success m-1" 
+                        th:href="|/mis-datos/direcciones/edit/${direccion.id}|">
+                        <i class="fa-solid fa-user-pen"></i> Editar</a>
+                    <a class="btn btn-danger m-1"  
+                        th:href="|/mis-datos/direcciones/delete/${direccion.id}|"> 
+                        <i class="fa-solid fa-trash-can"></i> Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="/mis-datos/direcciones/add">
+        <i class="fa-regular fa-square-plus"></i> Añadir una dirección </a>
+    
+    </div>
+  <div th:replace="~{fragmentos/general.html :: footer}"></div>
+</div>
+</body>
+
+</html>

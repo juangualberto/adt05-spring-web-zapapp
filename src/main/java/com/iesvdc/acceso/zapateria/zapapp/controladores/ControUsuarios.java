@@ -440,12 +440,12 @@ public class ControUsuarios {
         modelo.addAttribute(
                 "usuarioActual", oUsuario.get());
         modelo.addAttribute(
-                "telefonos", oUsuario.get().getTelefonos());
+                "direcciones", oUsuario.get().getDirecciones());
 
         // modelo.addAttribute(
         // "telefono", new Telefono());
 
-        return "admin/usuarios/direcciones/telefonos";
+        return "admin/usuarios/direcciones/direcciones";
     }
 
     @GetMapping("/{idUser}/direcciones/{idTel}/edit")
